@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use App\Enums\UserType;
 
 class PermissionSeeder extends Seeder
 {
@@ -30,7 +31,16 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'read clinic']);
         Permission::create(['name' => 'update clinic']);
         Permission::create(['name' => 'delete clinic']);
-
+        //appointment
+        Permission::create(['name' => 'create appointment']);
+        Permission::create(['name' => 'read appointment']);
+        Permission::create(['name' => 'update appointment']);
+        Permission::create(['name' => 'delete appointment']);
+        //patient
+        Permission::create(['name' => 'create patient']);
+        Permission::create(['name' => 'read patient']);
+        Permission::create(['name' => 'update patient']);
+        Permission::create(['name' => 'delete patient']);
         
         $superadmin->givePermissionTo([
             'crud clinics',
@@ -41,6 +51,14 @@ class PermissionSeeder extends Seeder
             'read clinic',
             'update clinic',
             'delete clinic',
+            'create appointment',
+            'read appointment',
+            'update appointment',
+            'delete appointment',
+            'create patient',
+            'read patient',
+            'update patient',
+            'delete patient',
         ]);
 
         $user->givePermissionTo([
@@ -49,9 +67,15 @@ class PermissionSeeder extends Seeder
 
         $users = User::all();
 
-        foreach ($users as $user) {
-            if($user->role_id != null)
-                $user->assignRole($user->role_id);
+        foreach ($users as $u) {
+            if($u->role_id != null)
+                $u->assignRole($u->role_id);
+            /*if($u->role_id != UserType::SuperAdmin)
+                $u->assignRole($superadmin);  
+            elseif($u->role_id != UserType::Admin)
+                $u->assignRole($admin);
+            elseif($u->role_id != UserType::User)
+                $u->assignRole($user);*/
         }
     }
 }

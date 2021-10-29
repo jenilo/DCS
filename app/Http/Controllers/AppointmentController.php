@@ -2,24 +2,20 @@
 
 namespace App\Http\Controllers;
 
-//use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
-use App\Models\Clinic;
-use App\Mail\SendTokenToUser;
-
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
-class ClinicController extends Controller
+class AppointmentController extends Controller
 {
     public function index(){
-        //return view();
+        return view('appointments.index');
     }
 
-    public function store(Request $request){
-        //if(Auth::user()->hasPermissionTo('crud clinics')){
+    public function filter(Request $request){
+        
+    }
+
+    /*public function store(Request $request){
+        if(Auth::user()->hasPermissionTo('create appointment')){
             //Validar los datos del request
             $validator = Validator::make($request->all(), [
                 'name' => 'required|unique:clinics|min:5|max:255',
@@ -27,7 +23,7 @@ class ClinicController extends Controller
             if ($validator->fails()) {
                 return  redirect()->back()->withErrors($validator)->withInput();
             }
-            //if($clinic = Clinic::create($request->all())){
+            if($clinic = Clinic::create($request->all())){
                 $clinic = new Clinic();
                 $clinic->name = $request->name;
                 $clinic->token = Hash::make(Str::random(48));
@@ -43,8 +39,8 @@ class ClinicController extends Controller
             }
           return  redirect()->back()->with('error', "No se puede crear la clinica.");
 
-        /*}
-        return redirect()->back->with('error','No tienes permiso.');*/
+        }
+        return redirect()->back->with('error','No tienes permiso.');
     }
 
     public function show(Clinic $clinic){
@@ -78,5 +74,5 @@ class ClinicController extends Controller
             'message' => 'No tienes permiso para eliminar.', 
             'code' => '200'
         ]);
-    }
+    }*/
 }

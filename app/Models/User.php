@@ -31,8 +31,8 @@ class User extends Authenticatable
         'email',
         'password',
         'phone',
-        'userType',
         'clinic_id',
+        'role_id'
     ];
 
     /**
@@ -65,4 +65,5 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
 }

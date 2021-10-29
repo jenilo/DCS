@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Enums\UserType;
 
 class CreateUsersTable extends Migration
 {
@@ -24,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('profile_photo_path', 2048)->nullable();
             $table->string('phone',10);
             //$table->enum('userType', ['SuperAdmin','Admin', 'User']);
-            $table->integer('role_id');
+            $table->integer('role_id')->default(UserType::User);
             $table->string('token')->default("0");
             $table->unsignedBigInteger('clinic_id')->nullable();
             $table->foreign('clinic_id')->references('id')->on('clinics');
