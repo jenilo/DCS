@@ -15,6 +15,16 @@
             </a>
         </li>
         <li class="m-2">
+            <a href="{{route('treatments')}}" class="d-block my-2 text-start fw-bold fs-6 text-dark text-decoration-none">
+                <i class="fas fa-user"></i></i> Tratamientos
+            </a>
+        </li>
+        <li class="m-2">
+            <a href="{{route('forms')}}" class="d-block my-2 text-start fw-bold fs-6 text-dark text-decoration-none">
+                <i class="fas fa-user"></i></i> Formularios
+            </a>
+        </li>
+        <li class="m-2">
             <a href="" class="d-block my-2 fw-bold fs-6 text-dark text-decoration-none">Link</a>
         </li>
     </ul>

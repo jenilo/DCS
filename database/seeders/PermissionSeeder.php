@@ -41,6 +41,16 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'read patient']);
         Permission::create(['name' => 'update patient']);
         Permission::create(['name' => 'delete patient']);
+        //treatment
+        Permission::create(['name' => 'create treatment']);
+        Permission::create(['name' => 'read treatment']);
+        Permission::create(['name' => 'update treatment']);
+        Permission::create(['name' => 'delete treatment']);
+        //forms
+        Permission::create(['name' => 'create form']);
+        Permission::create(['name' => 'read form']);
+        Permission::create(['name' => 'update form']);
+        Permission::create(['name' => 'delete form']);
         
         $superadmin->givePermissionTo([
             'crud clinics',
@@ -59,6 +69,14 @@ class PermissionSeeder extends Seeder
             'read patient',
             'update patient',
             'delete patient',
+            'create treatment',
+            'read treatment',
+            'update treatment',
+            'delete treatment',
+            'create form',
+            'read form',
+            'update form',
+            'delete form',
         ]);
 
         $user->givePermissionTo([
@@ -70,11 +88,11 @@ class PermissionSeeder extends Seeder
         foreach ($users as $u) {
             if($u->role_id != null)
                 $u->assignRole($u->role_id);
-            /*if($u->role_id != UserType::SuperAdmin)
+            /*if($u->role_id == UserType::SuperAdmin)
                 $u->assignRole($superadmin);  
-            elseif($u->role_id != UserType::Admin)
+            elseif($u->role_id == UserType::Admin)
                 $u->assignRole($admin);
-            elseif($u->role_id != UserType::User)
+            elseif($u->role_id == UserType::User)
                 $u->assignRole($user);*/
         }
     }

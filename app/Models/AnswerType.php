@@ -13,7 +13,7 @@ class AnswerType extends Model
     // protected $primaryKey = 'id';
     public $timestamps = false;
     protected $guarded = ['id'];
-    protected $fillable = ['name'];
+    protected $fillable = ['answerType'];
     //protected $hidden = [];
     // protected $dates = [];
 }

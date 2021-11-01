@@ -20,27 +20,21 @@ class PatientController extends Controller
         if(Auth::user()->hasPermissionTo('create patient')){
             //Validar los datos del request
             $validator = Validator::make($request->all(), [
-                'name' => 'required|min:5|max:255',
+            //$validator = $request->validate([
+                'name' => 'required|string|min:5|max:255',
                 'dateBirth' => 'date|required',
                 'phone' => 'required|digits:10|min:10|max:10',
-                'address' => 'required|min:15|max:255',
-                'employment' => 'nullable',
+                'address' => 'required|string|min:15|max:255',
+                'employment' => 'string|nullable',
             ]);
-            if ($validator->fails()) {
+            if ($validator->fails())
                 return  Redirect::back()->withErrors($validator)->withInput();
-            }
-            //if($clinic = Clinic::create($request->all())){
-            $patient = new Patient();
-            $patient->name = $request->name;
-            $patient->dateBirth = $request->dateBirth;
-            $patient->phone = $request->phone;
-            $patient->address = $request->address;
-            $patient->employment = $request->employment;
-            $patient->clinic_id = Auth::user()->clinic_id;
-            if($patient->save()){
-            return  Redirect::back()->with('success', 'Paciente creado satisfactoriamente.');
-            }
-          return  Redirect::back()->with('error', "No se puede crear el paciente.");
+                //return  Redirect::back()->with('error', 'fallo el validator.');
+
+            if($patient = Patient::create($request->all() + ['clinic_id' => Auth::user()->clinic_id]))
+                return  Redirect::back()->with('success', 'Paciente creado satisfactoriamente.');
+
+            return  Redirect::back()->with('error', "No se puede crear el paciente.");
 
         }
         return Redirect::back()->with('error',Auth::user());

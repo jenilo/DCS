@@ -9,7 +9,7 @@ class File extends Model
 {
     use HasFactory;
 
-    protected $table = 'medical_records';
+    protected $table = 'files';
     // protected $primaryKey = 'id';
     public $timestamps = false;
     protected $guarded = ['id'];

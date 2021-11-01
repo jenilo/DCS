@@ -9,11 +9,11 @@ class Treatment extends Model
 {
     use HasFactory;
 
-    protected $table = 'answer_types';
+    protected $table = 'treatments';
     // protected $primaryKey = 'id';
     public $timestamps = false;
     protected $guarded = ['id'];
-    protected $fillable = ['name'];
+    protected $fillable = ['name','clinic_id'];
     //protected $hidden = [];
     // protected $dates = [];
 }

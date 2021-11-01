@@ -9,7 +9,7 @@ class Appointment extends Model
 {
     use HasFactory;
 
-    protected $table = 'answer_types';
+    protected $table = 'appointments';
     // protected $primaryKey = 'id';
     public $timestamps = false;
     protected $guarded = ['id'];

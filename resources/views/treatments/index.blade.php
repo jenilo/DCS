@@ -7,12 +7,12 @@
       	<div class="row g-0">
       		<div class="col-md-8 col-12 my-auto">
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-0">
-                    Pacientes
+                    Tratamientos
                 </h2>
             </div>
       		<div class="col-md-4 col-12 my-auto text-right">
-                <!--<button type="button" class="btn btn-primary py-1" data-bs-toggle="modal" data-bs-target="#addPatientModal"><i class="fas fa-plus-circle"></i> Añadir paciente</button>-->
-                <a type="button" class="btn btn-primary py-1" href="{{route('createpatient')}}"><i class="fas fa-plus-circle"></i> Añadir paciente</a>
+                <button type="button" class="btn btn-primary py-1" data-bs-toggle="modal" data-bs-target="#addTreatmentModal"><i class="fas fa-plus-circle"></i> Añadir tratamiento</button>
+                <!--<a type="button" class="btn btn-primary py-1" href="{{route('createtreatment')}}"><i class="fas fa-plus-circle"></i> Añadir Tratamiento</a>-->
             </div>
       	</div>
       	<div class="row no-gutters">
@@ -22,28 +22,24 @@
 						<tr>
 							<th scope="col">#</th>
 							<th scope="col">Nombre</th>
-							<th scope="col">Fecha nacimiento</th>
-                            <th scope="col">Telefono</th>
                             <th scope="col">Actions</th>
 						</tr>
 					</thead>
                     <tfoot>
                         <tr>
                             <td colspan="5">
-                            @if(@isset($patients) && count($patients)>0)
-                                {{$patients->links()}}
+                            @if(@isset($treatments) && count($treatments)>0)
+                                {{$treatments->links()}}
                             @endif
                             </td>
                         </tr>
                     </tfoot>
 					<tbody>
-						@if(isset($patients) && count($patients)>0)
-            				@foreach ($patients as $patient)
-								<tr id="Category{{$patient->id}}">
-									<th>{{$patient->id}}</th>
-									<td>{{$patient->name}}</td>
-									<td>{{$patient->dateBirth}}</td>
-                                    <td>{{$patient->phone}}</td>
+						@if(isset($treatments) && count($treatments)>0)
+            				@foreach ($treatments as $treatment)
+								<tr id="Treatment{{$treatment->id}}">
+									<th>{{$treatment->id}}</th>
+									<td>{{$treatment->name}}</td>
 									<td>
 										{{--<button onclick="editCategory({{$category}})" type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#editCategoryModal">
 											<i class="fas fa-edit" ></i> Edit
@@ -62,7 +58,7 @@
 							@endforeach
 						@else
                             <tr>
-                                <td colspan="5" rowspan="3" class="text-center"><h1>No hay pacientes</h1></td>
+                                <td colspan="5" rowspan="3" class="text-center"><h1>No hay tratamientos</h1></td>
                             </tr>
                         @endif
 					</tbody>
@@ -74,6 +70,6 @@
 	</div>
 </div>
 
-@include('modals.modalAddPatient')
+@include('modals.modalAddTreatment')
 
 @endsection
