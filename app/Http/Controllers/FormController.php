@@ -34,6 +34,6 @@ class FormController extends Controller
             return  Redirect::back()->with('error', "No se puede crear el paciente.");
 
         }
-        return Redirect::back()->with('error',Auth::user());
+        return Redirect::back()->with('error',"No tiene permisos");
     }
 }

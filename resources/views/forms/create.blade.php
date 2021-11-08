@@ -10,71 +10,39 @@
             </h2>
         </div>
     </div>
-    {{--<div class="row g-0">
-        @if($errors->any())
-            @foreach($errors->all() as $error)
-                <p>{{$error}}</p>
-            @endforeach
-            {{$errors}}
-        @endif
-        @if(isset($answertypes))
-            <p>no vacio</p>
-            {{$answertypes}}
-        @endif
-    </div>--}}
     <div class="row g-0">
         <div class="col-lg-12">
-            <form method="POST" action="{{url('patients')}}" enctype="multipart/form-data">
+            <form method="POST" action="{{url('questions')}}" id="form_questions" enctype="multipart/form-data">
                 @csrf
-                {{--<div class="mb-3 row">
-                    <div class="row"></div>
-                    <label for="name" class="col-sm-8 col-form-label">Pregunta: </label>
-                    <label for="answer_type_id" class="col-sm-4 col-form-label">Tipo:</label>
-                    <div class="row form-group">
-                        <div class="col-sm-8">
-                            <input type="text" class="col-sm-8 form-control @error('question') is-invalid @enderror" id="question" name="question" value="{{ old('question') }}" required>
-                             @error('name')
-                                <span class="invalid-feedback">{{$errors->first('question')}}</span>
-                             @enderror
+                <div id="dynamic_field">
+                    <div class="mb-3 row" id="row0">
+                        <div class="col-md-6">
+                            <label for="name" class="col-md-8 col-form-label">Pregunta: </label>
+                            <textarea class="form-control" rows="2" id="question0" name="inputs[0][question]" required></textarea>
+                            <span id="spanquestion0`" class="invalid-feedback"> </span>
                         </div>
-                        <div class="col-sm-4">
-                            <select class="col-sm-4 form-control" name="answer_type_id" id="answer_type_id">
+                        <div class="col-md-2">
+                            <label for="answer_type_id" class="col-md-4 col-form-label">Tipo:</label>
+                            <select class="col-md-4 form-control" id="answer_type_id0" name="inputs[0][answer_type_id]" id="answer_type_id" required>
                                 <option selected disabled>Elegir</option>
                                 @foreach($answertypes as $answerType)
                                     <option value="{{$answerType->id}}">{{$answerType->answerType}}</option>
                                 @endforeach
                              </select>
+                             <span id="spananswer_type_id0`" class="invalid-feedback"> </span>
+                             <input type="hidden" name="inputs[0][form_id]" value="{{$form->id}}">
                         </div>
-                         
+                        <div class="col-sm-4 my-auto">
+                            <button id="add" type="button" class="btn btn-success"><i class="fas fa-plus"></i> Añadir</button>
+                        </div>
                     </div>
-                </div>--}}
 
-
-                <div class="mb-3 row" id="row1">
-                    <div class="col-md-6">
-                        <label for="name" class="col-md-8 col-form-label">Pregunta: </label>
-                        <textarea class="form-control" rows="2" name="question"></textarea>
-                    </div>
-                    <div class="col-md-2">
-                        <label for="answer_type_id" class="col-md-4 col-form-label">Tipo:</label>
-                        <select class="col-md-4 form-control" name="answer_type_id" id="answer_type_id">
-                            <option selected disabled>Elegir</option>
-                            @foreach($answertypes as $answerType)
-                                <option value="{{$answerType->id}}">{{$answerType->answerType}}</option>
-                            @endforeach
-                         </select>
-                    </div>
-                    <div class="col-sm-4 my-auto">
-                        <button id="add" type="button" class="btn btn-success"><i class="fas fa-plus"></i> Añadir</button>
-                    </div>
-                </div>
-
-                <div id="dynamic_field">
+                
                     
                 </div>
-
+                
                 <div class="text-right">
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" id="save" class="btn btn-primary">Save</button>
                     <button type="button" class="btn btn-warning">Cancel</button>
                 </div>
             </form>
@@ -85,31 +53,67 @@
 <script type="text/javascript">
     $(document).ready(function(){  
         var i=1;  
-        $('#add').click(function(){  
-           i++;  
+        $('#add').click(function(){    
            $('#dynamic_field').append(`<div class="mb-3 row" id="row`+i+`">
                     <div class="col-md-6">
                         <label for="name" class="col-md-8 col-form-label">Pregunta: </label>
-                        <textarea class="form-control" rows="2" name="question"></textarea>
+                        <textarea class="form-control" rows="2" id="question`+i+`" name="inputs[`+i+`][question]" required></textarea>
+                        <span id="spanquestion`+i+`" class="invalid-feedback"> </span>
                     </div>
                     <div class="col-md-2">
                         <label for="answer_type_id" class="col-md-4 col-form-label">Tipo:</label>
-                        <select class="col-md-4 form-control" name="answer_type_id" id="answer_type_id">
+                        <select class="col-md-4 form-control" name="inputs.`+i+`.answer_type_id" id="answer_type_id`+i+`" required>
                             <option selected disabled>Elegir</option>
                             @foreach($answertypes as $answerType)
                                 <option value="{{$answerType->id}}">{{$answerType->answerType}}</option>
                             @endforeach
                          </select>
+                         <span id="spananswer_type_id`+i+`" class="invalid-feedback"> </span>
                     </div>
                     <div class="col-sm-4 my-auto">
                         <button type="button" name="remove" id="`+i+`" class="btn btn-danger btn_remove"><i class="fas fa-minus"></i></button>
                     </div>
                 </div>`);  
+           i++;
         });  
         $(document).on('click', '.btn_remove', function(){  
            var button_id = $(this).attr("id");   
            $('#row'+button_id+'').remove();  
-        });  
+        });
+
+        $('#form_questions').on('submit', function(event){
+            event.preventDefault();
+
+            $.ajax({
+                url:'{{ url("questions") }}',
+                method:'post',
+                data:$(this).serialize(),
+                dataType:'json',
+                beforeSend:function(){
+                    $('#save').attr('disabled','disabled');
+                },
+            }).done(function(data){
+                console.log(data);
+                errors(data);
+                $('#save').attr('disabled', false);
+            });
+
+        }); 
+
+        function errors(data){
+            $.each( data, function( key, value ) {
+                var id = key.split('inputs.').pop()[0];
+                var type = key.split('.').pop().split('.')[0];
+                //console.log(id);
+                //console.log('#'+type+id);
+
+                $('#'+type+id).addClass("is-invalid");
+                $('#span.'+type+id).text("Hola");
+                console.log($('#span'+type+id));
+                //console.log($('#'+type+id));
+            });
+        }
+
     });  
 </script>
 

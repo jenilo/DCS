@@ -42,6 +42,7 @@
 									<td>{{$form->name}}</td>
 									<td>
 										<a type="button" class="btn btn-primary py-1" href="{{route('createquestions',['form' => $form->id])}}"><i class="fas fa-plus-circle"></i> añadir preguntas</a>
+										<a type="button" class="btn btn-primary py-1" href="{{route('editquestions',['form' => $form->id])}}"><i class="fas fa-plus-circle"></i> editar preguntas</a>
 										{{--<button onclick="editCategory({{$category}})" type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#editCategoryModal">
 											<i class="fas fa-edit" ></i> Edit
 										</button>

@@ -12,4 +12,6 @@
 	</div>
 </div>
 
+@include('modals.modalShowAppointment')
+
 @endsection

@@ -16,4 +16,8 @@ class Form extends Model
     protected $fillable = ['name','clinic_id'];
     //protected $hidden = [];
     // protected $dates = [];
+
+    public function questions(){
+        return $this->hasMany(Question::class);
+    }
 }

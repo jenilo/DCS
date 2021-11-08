@@ -26,10 +26,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-/*Route::get('clinicregister', function() {
-    return view('clinics.register');
-});*/
-
 Route::group(['prefix' => 'clinic'], function() {
     Route::post('register', [ClinicController::class, 'store']);
     Route::get('register', function() {return view('clinics.register');})->name('clinicregister');
@@ -55,6 +51,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     Route::get('patients', [PatientController::class, 'index'])->name('patients'); //probablemente ocupe middleware despues
+    Route::get('patients/search/{name?}', [PatientController::class, 'search'])->name('searchpatient');
     Route::group(['middleware' => 'can:create patient'], function(){
         Route::get('patients/create', function (){ return view('patients.create'); })->name('createpatient');
         Route::post('patients', [PatientController::class, 'store']);
@@ -71,11 +68,19 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('forms/create', function (){ return view('forms.create'); })->name('createform');
         Route::post('forms', [FormController::class, 'store']);
         Route::get('form/{form}/questions/create', [QuestionController::class, 'index'])->name('createquestions');
+        Route::post('questions', [QuestionController::class, 'store']);
+        Route::get('form/{form}/questions/edit', [QuestionController::class, 'edit'])->name('editquestions');
+        Route::post('questions/edit', [QuestionController::class, 'update']);
+        Route::delete('questions/{question}', [QuestionController::class, 'destroy'])->name('questiondestroy');
+        //Route::post('questions', [QuestionController::class, 'destroy'])->name('questiondestroy');
+
     });
     
     
-
-    Route::get('appointments', [AppointmentController::class, 'index'])->name('home');
-    Route::get('appointments/filter', [AppointmentController::class, 'filter']);
+    Route::get('appointments/create/{date?}', [AppointmentController::class, 'create'])->name('createappointment');
+    Route::post('appointments', [AppointmentController::class, 'store'])->name('saveappointment');
+    Route::get('appointments', [AppointmentController::class, 'index'])->name('appointments');
+    Route::get('appointments/show/{id}', [AppointmentController::class, 'show']);
+    Route::get('appointments/all/', [AppointmentController::class, 'all']);
 
 });

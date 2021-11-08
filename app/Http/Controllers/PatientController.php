@@ -39,4 +39,9 @@ class PatientController extends Controller
         }
         return Redirect::back()->with('error',Auth::user());
     }
+
+    public function search($name = null){
+        $patients = Patient::where('clinic_id','=',Auth::user()->clinic_id)->where('name','like',$name.'%')->get();
+        return response()->json($patients);
+    }
 }

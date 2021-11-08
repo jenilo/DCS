@@ -1,0 +1,202 @@
+@extends('layouts.app')
+
+@section('content')
+
+<div class="container p-2">
+    <div class="row g-0">
+        <div class="col-md-8 col-12 my-auto">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-0">
+                {{$form->name}}
+            </h2>
+        </div>
+    </div>
+    {{--$questions[0]->questions--}}
+    <div class="row g-0">
+        <div class="col-lg-12">
+            <form method="POST" action="{{url('questions/edit')}}" id="form_questions" enctype="multipart/form-data">
+                @csrf
+                {{--<div id="dynamic_field">--}}
+                    <table class="table" id="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Pregunta</th>
+                                <th scope="col">Tipo</th>
+                                <th scope="col"><button id="add" type="button" class="btn btn-success"><i class="fas fa-plus"></i> Añadir</button></th>
+                            </tr>
+                        </thead>
+                        <tbody id="dynamic_field">
+                            @foreach($questions[0]->questions as $question)
+                                <tr id="{{$loop->iteration}}">
+                                    <td><textarea class="form-control" rows="2" id="question0" name="inputs[{{$loop->iteration-1}}][question]" required>{{$question->question}}</textarea>
+                                    </td>
+                                    <td>
+                                        <select class="col-md-4 form-control" id="answer_type_id0" name="inputs[{{$loop->iteration-1}}][answer_type_id]" id="answer_type_id" required>
+                                        @foreach($answertypes as $answerType)
+                                            <option value="{{$answerType->id}}"{{ ($question->answer_type_id == $answerType->id) ? 'selected' : '' ;}}>{{$answerType->answerType}}</option>
+                                        @endforeach
+                                        </select>
+                                        <input type="hidden" name="inputs[{{$loop->iteration-1}}][id]" value="{{$question->id}}">
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger" onclick="deleteRow('{{$question->id}}','{{url('questions')}}','{{$loop->iteration}}')"><i class="fas fa-minus"></i> Eliminar</button>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    <input type="hidden" name="form_id" value="{{$form->id}}">
+                    {{--@foreach($questions[0]->questions as $question)
+                    
+                    <div class="mb-3 row" id="row0">
+                        <div class="col-md-6">
+                            <label for="name" class="col-md-8 col-form-label">Pregunta: </label>
+                            <textarea class="form-control" rows="2" id="question0" name="inputs[0][question]" required>{{$question->question}}</textarea>
+                            <span id="spanquestion0`" class="invalid-feedback"> </span>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="answer_type_id" class="col-md-4 col-form-label">Tipo:</label>
+                            <select class="col-md-4 form-control" id="answer_type_id0" name="inputs[0][answer_type_id]" id="answer_type_id" required>
+                                @foreach($answertypes as $answerType)
+                                    <option value="{{$answerType->id}}"{{ ($question->answer_type_id == $answerType->id) ? 'selected' : '' ;}}>{{$answerType->answerType}}</option>
+                                @endforeach
+                             </select>
+                             <span id="spananswer_type_id0`" class="invalid-feedback"> </span>
+                             <input type="hidden" name="inputs[0][form_id]" value="{{$form->id}}">
+                        </div>
+                        @if ($loop->first)
+                            <div class="col-sm-4 my-auto">
+                                <button id="add" type="button" class="btn btn-success"><i class="fas fa-plus"></i> Añadir</button>
+                            </div>
+                        @endif
+                    </div>
+
+                    @endforeach--}}
+
+                    
+                {{--</div>--}}
+                
+                <div class="text-right">
+                    <button type="submit" id="save" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-warning">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function(){  
+        var i = {{count($questions[0]->questions)}};  
+        $('#add').click(function(){
+
+                $('#dynamic_field').append(`<tr>
+                    <td><textarea class="form-control" rows="2" id="question0" name="inputs[`+i+`][question]" required></textarea></td>
+                    <td><select class="col-md-4 form-control" id="answer_type_id0" name="inputs[`+i+`][answer_type_id]" id="answer_type_id" required>
+                        <option selected disabled>Elegir</option>
+                        @foreach($answertypes as $answerType)
+                            <option value="{{$answerType->id}}">{{$answerType->answerType}}</option>
+                        @endforeach
+                    </select></td>
+                    <input type="hidden" name="inputs[`+i+`][id]" value="-1">
+                    <td><button id="`+i+`" type="button" name="remove" class="btn btn-danger btn_remove"><i class="fas fa-minus"></i></button</td>
+                </tr>`);
+
+           i++;
+        });  
+        $(document).on('click', '.btn_remove', function(){  
+           var button_id = $(this).attr("id");   
+           $('#row'+button_id+'').remove();  
+        });
+
+        $('#form_questions').on('submit', function(event){
+            event.preventDefault();
+
+            $.ajax({
+                url:'{{ url("questions/edit") }}',
+                method:'post',
+                data:$(this).serialize(),
+                dataType:'json',
+                beforeSend:function(){
+                    $('#save').attr('disabled','disabled');
+                },
+            }).done(function(data){
+                console.log(data);
+                //errors(data);
+                $('#save').attr('disabled', false);
+            });
+
+            //console.log($(this).serialize());
+
+            /*axios.post('{{ url("questions/edit") }}',$(this).serialize()).then(function (response) {
+                console.log(response.data);
+            })
+            .catch(function (error) {
+                console.log(error);
+                swal("Error!",{icon: "error"});
+            });*/
+
+        }); 
+
+        function errors(data){
+            $.each( data, function( key, value ) {
+                var id = key.split('inputs.').pop()[0];
+                var type = key.split('.').pop().split('.')[0];
+                //console.log(id);
+                //console.log('#'+type+id);
+
+                $('#'+type+id).addClass("is-invalid");
+                $('#span.'+type+id).text("Hola");
+                console.log($('#span'+type+id));
+                //console.log($('#'+type+id));
+            });
+        }
+
+
+    });
+
+    function deleteRow(question,url,tr){
+        alert(question);
+
+        Swal.fire({
+            title: '¿Esta seguro?',
+            text: "No se puede revertir esta acción.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si eliminar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                axios.delete(url+"/"+question,{
+                    id: question,
+                    _token:'{{ csrf_token() }}',
+                }).then(function (response) {
+                    console.log(response.data);
+                    if(response.data.code == '200'){
+                        Swal.fire(
+                            'Eliminado!',
+                            response.data.message,
+                            'success'
+                        );
+                        $('#'+tr).remove();
+                    }
+                    else{
+                        Swal.fire(
+                            'Error!',
+                            response.data.message,
+                            'error'
+                        );
+                    }
+
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    swal("Error!",{icon: "error"});
+                });
+            }
+        });
+    }  
+</script>
+
+@endsection

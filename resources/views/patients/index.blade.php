@@ -74,6 +74,4 @@
 	</div>
 </div>
 
-@include('modals.modalAddPatient')
-
 @endsection
