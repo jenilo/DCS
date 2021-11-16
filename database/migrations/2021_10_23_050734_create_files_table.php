@@ -15,9 +15,10 @@ class CreateFilesTable extends Migration
     {
         Schema::create('files', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->string('filePath');
             $table->date('saveDate');
-            $table->foreignId('type_file_id')->constrained();
+            //$table->foreignId('type_file_id')->constrained();
             $table->foreignId('medical_record_id')->constrained();
         });
     }

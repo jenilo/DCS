@@ -14,12 +14,16 @@ class AnswerTypeSeeder extends Seeder
      */
     public function run()
     {
-        $answertype = new AnswerType();
-        $answertype->answerType = "Si o No";
-        $answertype->save();
+        $answerType = new AnswerType();
+        $answerType->answerType = "Si o No";
+        $answerType->save();
 
-        $answertype = new AnswerType();
-        $answertype->answerType = "Pregunta abierta";
-        $answertype->save();
+        $answerType = new AnswerType();
+        $answerType->answerType = "Respuesta abierta corta";
+        $answerType->save();
+        
+        $answerType = new AnswerType();
+        $answerType->answerType = "Respuesta abierta larga";
+        $answerType->save();
     }
 }

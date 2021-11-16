@@ -17,6 +17,7 @@ class CreateAnswersTable extends Migration
             $table->id();
             $table->text('answer');
             $table->foreignId('question_id')->constrained();
+            $table->foreignId('completed_form_id')->constrained();
         });
     }
 

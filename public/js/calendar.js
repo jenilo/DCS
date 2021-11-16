@@ -64,7 +64,17 @@ document.addEventListener('DOMContentLoaded', function() {
 	calendar.render();
 
 	function showAppointment(data){
-		console.log(data.name);
+
+		$('#addMedicalRecord').click(function(){
+			//console.log(data);
+			window.location.href = "http://127.0.0.1:8000/patient/"+data.patient_id;
+		});
+		$('#showMedicalRecord').click(function(){
+			//console.log(data);
+			window.location.href = "http://127.0.0.1:8000/patient/"+data.patient_id;
+		});
+		
+		//console.log(data.patient_id);
 		$('#name_patient').text(data.name);
 		$('#dateBirth').text(data.dateBirth);
 		$('#age').text(moment().diff(data.dateBirth,'years')+" años");
@@ -88,23 +98,33 @@ document.addEventListener('DOMContentLoaded', function() {
 
 		$('#dateAppointment').text(moment(data.date).format("dddd, MMMM Do YYYY"));
 
-		var now = moment().format("YYYY-MM-DD H:mm");
-		var momentAppointment = moment(data.date+' '+data.timeStart).format("YYYY-MM-DD H:mm");
+		var now = moment().format("YYYY-MM-DD hh:mm");
+		var momentAppointment = moment(data.date+' '+data.timeStart).format("YYYY-MM-DD hh:mm");
 
 		var diff = moment(now).diff(moment(momentAppointment), 'seconds');
+		console.log(now+" "+momentAppointment);
+		console.log(diff);
 
-		if(diff > 0){
+		if(diff == 0)
+			$('#relativeTime').text("Now");
+		else
+			$('#relativeTime').text(moment(momentAppointment).fromNow());
+
+
+
+		/*if(diff > 0){
 			console.log(moment(momentAppointment).fromNow());
 			$('#relativeTime').text(moment(momentAppointment).fromNow());
 		}
 		else if(diff < 0){
-			console.log(moment(momentAppointment).toNow());
+			//console.log(moment(momentAppointment).toNow());
+			//console.log(moment(momentAppointment).fromNow());
 			$('#relativeTime').text(moment(momentAppointment).toNow());
 		}
 		else{
 			$('#relativeTime').text("Now");
 			console.log("Ahora");
-		}
+		}*/
 
 
 		/*if (moment().isSame(data.date,'day')) {

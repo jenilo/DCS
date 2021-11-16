@@ -13,7 +13,12 @@ class Answer extends Model
     // protected $primaryKey = 'id';
     public $timestamps = false;
     protected $guarded = ['id'];
-    protected $fillable = ['answer','question_id'];
+    protected $fillable = ['answer','question_id','medical_record_id'];
     //protected $hidden = [];
     // protected $dates = [];
+
+    public function question()
+    {
+        return $this->belongsTo(Question::class, 'question_id');
+    }
 }

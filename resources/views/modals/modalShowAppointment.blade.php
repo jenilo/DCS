@@ -24,6 +24,11 @@
                     <h6 class="fw-bold">Tratamiento: <span class="fw-normal" id="treatment"> tratamiento</span></h6>
                     <h6 class="fw-bold">Notas:</h6>
                     <p id="notes">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi tempora temporibus amet maiores dolores placeat dolor, fugiat ut quo asperiores vitae aliquam ea, corporis rem, blanditiis sint. Illo, aliquid, fugit.</p>
+                    <div class="">
+                        <button id="addMedicalRecord" class="btn btn-success"><i class="fas fa-folder-plus"></i> Añadir registro médico</button>
+                        <button id="showMedicalRecord" class="btn btn-primary"><i class="far fa-folder-open"></i> Ver expediente</button>
+                    </div>
+                    
                 </div>
             </div>
 

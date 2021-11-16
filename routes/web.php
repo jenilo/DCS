@@ -10,6 +10,9 @@ use App\Http\Controllers\TreatmentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\MedicalRecordController;
+use App\Http\Controllers\CompletedFormController;
+use App\Http\Controllers\File;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +58,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'can:create patient'], function(){
         Route::get('patients/create', function (){ return view('patients.create'); })->name('createpatient');
         Route::post('patients', [PatientController::class, 'store']);
+        Route::get('patient/{patient}', [PatientController::class, 'show'])->name('patient');
+        //Route::post('patient/completeform', [CompletedFormController::class, 'index'])->name('completeform');
+        Route::get('patient/{medical_record}/form/{form}/create', [CompletedFormController::class, 'index'])->name('completeform');
+        //Route::get('patient/{medical_record}/form/{form}/show', [CompletedFormController::class, 'show'])->name('showcompleteform');
+        Route::get('patient/completedform/{completed_form}', [CompletedFormController::class, 'show'])->name('showcompletedform');
+        Route::post('patient/completeform/create', [CompletedFormController::class, 'store'])->name('createcompleteform');
+        Route::post('patient/completeform/update', [CompletedFormController::class, 'update'])->name('updatecompleteform');
+
+        Route::post('patient/file/create',[FileController::class, 'store'])->name('createfile');
     });
 
     Route::get('treatments', [TreatmentController::class, 'index'])->name('treatments');

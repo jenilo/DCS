@@ -38,42 +38,14 @@
                                         <input type="hidden" name="inputs[{{$loop->iteration-1}}][id]" value="{{$question->id}}">
                                     </td>
                                     <td>
-                                        <button type="button" class="btn btn-danger" onclick="deleteRow('{{$question->id}}','{{url('questions')}}','{{$loop->iteration}}')"><i class="fas fa-minus"></i> Eliminar</button>
+                                        <button type="button" class="btn btn-danger" onclick="deleteRecord('{{$question->id}}','{{url('questions')}}','{{$loop->iteration}}')"><i class="fas fa-minus"></i> Eliminar</button>
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
                     <input type="hidden" name="form_id" value="{{$form->id}}">
-                    {{--@foreach($questions[0]->questions as $question)
                     
-                    <div class="mb-3 row" id="row0">
-                        <div class="col-md-6">
-                            <label for="name" class="col-md-8 col-form-label">Pregunta: </label>
-                            <textarea class="form-control" rows="2" id="question0" name="inputs[0][question]" required>{{$question->question}}</textarea>
-                            <span id="spanquestion0`" class="invalid-feedback"> </span>
-                        </div>
-                        <div class="col-md-2">
-                            <label for="answer_type_id" class="col-md-4 col-form-label">Tipo:</label>
-                            <select class="col-md-4 form-control" id="answer_type_id0" name="inputs[0][answer_type_id]" id="answer_type_id" required>
-                                @foreach($answertypes as $answerType)
-                                    <option value="{{$answerType->id}}"{{ ($question->answer_type_id == $answerType->id) ? 'selected' : '' ;}}>{{$answerType->answerType}}</option>
-                                @endforeach
-                             </select>
-                             <span id="spananswer_type_id0`" class="invalid-feedback"> </span>
-                             <input type="hidden" name="inputs[0][form_id]" value="{{$form->id}}">
-                        </div>
-                        @if ($loop->first)
-                            <div class="col-sm-4 my-auto">
-                                <button id="add" type="button" class="btn btn-success"><i class="fas fa-plus"></i> Añadir</button>
-                            </div>
-                        @endif
-                    </div>
-
-                    @endforeach--}}
-
-                    
-                {{--</div>--}}
                 
                 <div class="text-right">
                     <button type="submit" id="save" class="btn btn-primary">Save</button>
@@ -89,7 +61,7 @@
         var i = {{count($questions[0]->questions)}};  
         $('#add').click(function(){
 
-                $('#dynamic_field').append(`<tr>
+                $('#dynamic_field').append(`<tr id="row`+i+`">
                     <td><textarea class="form-control" rows="2" id="question0" name="inputs[`+i+`][question]" required></textarea></td>
                     <td><select class="col-md-4 form-control" id="answer_type_id0" name="inputs[`+i+`][answer_type_id]" id="answer_type_id" required>
                         <option selected disabled>Elegir</option>
@@ -103,7 +75,9 @@
 
            i++;
         });  
+
         $(document).on('click', '.btn_remove', function(){  
+            console.log("entre?");
            var button_id = $(this).attr("id");   
            $('#row'+button_id+'').remove();  
         });
@@ -154,7 +128,7 @@
 
     });
 
-    function deleteRow(question,url,tr){
+    function deleteRecord(question,url,tr){
         alert(question);
 
         Swal.fire({

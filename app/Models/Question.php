@@ -16,4 +16,8 @@ class Question extends Model
     protected $fillable = ['question','answer_type_id','form_id'];
     //protected $hidden = [];
     // protected $dates = [];
+
+    public function answerType(){
+        return $this->belongsTo(AnswerType::class,'answer_type_id');
+    }
 }

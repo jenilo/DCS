@@ -55,14 +55,18 @@ class AppointmentController extends Controller
 
             ]);
             if ($validator->fails()) 
-                return response()->json($validator->errors());
+                return  Redirect::back()->withErrors($validator)->withInput();
 
-            if($appointment = Appointment::create($request->all())){
-                
+            //pregunta si existe una cita para esa fecha.
 
-                return  redirect()->back()->with('success', 'Clinica creada satisfactoriamente.');
-            }
-          return  redirect()->back()->with('error', "No se puede crear la clinica.");
+            //if () {
+                if($appointment = Appointment::create($request->all()))
+                    return  redirect()->back()->with('success', 'Cita creada satisfactoriamente.');
+                else
+                    return  redirect()->back()->with('error', "No se puede crear la cita.");
+            //}
+            
+          
 
         }
         return redirect()->back->with('error','No tienes permiso.');

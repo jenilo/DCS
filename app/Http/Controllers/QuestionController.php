@@ -82,11 +82,11 @@ class QuestionController extends Controller
             return response()->json(['code'=> '200','message'=>'Edición exitosa']);
 
             //return  Redirect::back()->with('error', "No se puede crear las preguntas.");
-            return response()->json('error', "No se puede crear las preguntas");
+            return response()->json(['code'=> '400','message'=>'No se puede crear las preguntas']);
 
         }
         //return Redirect::back()->with('error',"No tiene permisos.");
-        return response()->json('error', "No tiene permisos");
+        return response()->json(['code'=> '400','message'=>'No tienes permisos']);
     }
 
     public function destroy(Question $question){
