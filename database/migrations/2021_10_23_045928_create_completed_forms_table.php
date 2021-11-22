@@ -17,7 +17,7 @@ class CreateCompletedFormsTable extends Migration
             $table->id();
             $table->date('saveDate');
             $table->foreignId('medical_record_id')->constrained();
-            $table->foreignId('form_id')->constrained();
+            $table->foreignId('form_id')->constrained()->onDelete('cascade');
         });
     }
 

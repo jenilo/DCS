@@ -36,4 +36,32 @@ class FormController extends Controller
         }
         return Redirect::back()->with('error',"No tiene permisos");
     }
+
+    public function destroy($form){
+
+        if (Auth::user()->hasPermissionTo('delete form')) {
+            $form = Form::where('id','=',$form)->first();
+            /*if ($form->delete()) {
+                        return response()->json(['code'=> '200','message'=>'Eliminado exitoso']);
+                    }
+            return response()->json(['code'=> '400','message'=>'No se ha eliminado']);*/
+            if ($form != null) {
+                //$count = Form::selectRaw("count('patient_id') as count")->join('appointments','appointments.patient_id','=','patients.id')->where('patients.id','=',$form->id)->groupBy('patient_id')->first();
+                if ($count == null) {
+                    //return response()->json(['code' => '200', 'message' => 'Se elimino']);
+                    if ($form->delete()) {
+                        return response()->json(['code'=> '200','message'=>'Eliminado exitoso']);
+                    }
+                    return response()->json(['code'=> '400','message'=>'No se elimino el tratamiento.']);
+                }
+                else{
+                    return response()->json(['code'=> '400','message'=>'Este paciente tiene '.$count->count.' citas, no puede eliminarse.']);
+                }
+            }
+            else{
+                return response()->json(['code'=> '404','message'=>'Registro no encontrado.']);
+            }
+        }
+        return response()->json(['code'=> '400','message'=>'No tienes permiso para esto.']);
+    }
 }

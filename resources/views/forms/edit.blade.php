@@ -2,60 +2,65 @@
 
 @section('content')
 
-<div class="container p-2">
-    <div class="row g-0">
-        <div class="col-md-8 col-12 my-auto">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-0">
+
+<div class="p-4">
+    <div class="container bg-white p-4 rounded shadow">
+        <div class="row g-0">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-0 fw-bold">
                 {{$form->name}}
             </h2>
         </div>
-    </div>
-    {{--$questions[0]->questions--}}
-    <div class="row g-0">
-        <div class="col-lg-12">
-            <form method="POST" action="{{url('questions/edit')}}" id="form_questions" enctype="multipart/form-data">
-                @csrf
-                {{--<div id="dynamic_field">--}}
-                    <table class="table" id="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Pregunta</th>
-                                <th scope="col">Tipo</th>
-                                <th scope="col"><button id="add" type="button" class="btn btn-success"><i class="fas fa-plus"></i> Añadir</button></th>
-                            </tr>
-                        </thead>
-                        <tbody id="dynamic_field">
-                            @foreach($questions[0]->questions as $question)
-                                <tr id="{{$loop->iteration}}">
-                                    <td><textarea class="form-control" rows="2" id="question0" name="inputs[{{$loop->iteration-1}}][question]" required>{{$question->question}}</textarea>
-                                    </td>
-                                    <td>
-                                        <select class="col-md-4 form-control" id="answer_type_id0" name="inputs[{{$loop->iteration-1}}][answer_type_id]" id="answer_type_id" required>
-                                        @foreach($answertypes as $answerType)
-                                            <option value="{{$answerType->id}}"{{ ($question->answer_type_id == $answerType->id) ? 'selected' : '' ;}}>{{$answerType->answerType}}</option>
-                                        @endforeach
-                                        </select>
-                                        <input type="hidden" name="inputs[{{$loop->iteration-1}}][id]" value="{{$question->id}}">
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-danger" onclick="deleteRecord('{{$question->id}}','{{url('questions')}}','{{$loop->iteration}}')"><i class="fas fa-minus"></i> Eliminar</button>
-                                    </td>
+        
+        <div class="row g-0">
+            <div class="col-lg-12">
+                <form method="POST" action="{{url('questions/edit')}}" id="form_questions" enctype="multipart/form-data">
+                    @csrf
+                        <table class="table" id="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Pregunta</th>
+                                    <th scope="col">Tipo</th>
+                                    <th scope="col">
+                                        <!--<button id="add" type="button" class="btn btn-success"><i class="fas fa-plus"></i> Añadir</button>-->
+                                        <button id="add" type="button" class="btn btn-primary bg-aquablue rounded-pill"><i class="fas fa-plus"></i>&nbsp Añadir</button>
+                                    </th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                    <input type="hidden" name="form_id" value="{{$form->id}}">
+                            </thead>
+                            <tbody id="dynamic_field">
+                                @foreach($questions[0]->questions as $question)
+                                    <tr id="{{$loop->iteration}}">
+                                        <td><textarea class="form-control" rows="2" id="question0" name="inputs[{{$loop->iteration-1}}][question]" required>{{$question->question}}</textarea>
+                                        </td>
+                                        <td>
+                                            <select class="col-md-4 form-control" id="answer_type_id0" name="inputs[{{$loop->iteration-1}}][answer_type_id]" id="answer_type_id" required>
+                                            @foreach($answertypes as $answerType)
+                                                <option value="{{$answerType->id}}"{{ ($question->answer_type_id == $answerType->id) ? 'selected' : '' ;}}>{{$answerType->answerType}}</option>
+                                            @endforeach
+                                            </select>
+                                            <input type="hidden" name="inputs[{{$loop->iteration-1}}][id]" value="{{$question->id}}">
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-danger" onclick="deleteRecord('{{$question->id}}','{{url('questions')}}','{{$loop->iteration}}')"><i class="fas fa-minus"></i> Eliminar</button>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        <input type="hidden" name="form_id" value="{{$form->id}}">
+                        
                     
-                
-                <div class="text-right">
-                    <button type="submit" id="save" class="btn btn-primary">Save</button>
-                    <button type="button" class="btn btn-warning">Cancel</button>
-                </div>
-            </form>
+                    <div class="text-right">
+                        <button type="submit" id="save" class="btn btn-primary bg-aquablue text-white fw-bold">Guardar</button>
+                        <!--<button type="button" class="btn btn-warning text-white">Cancel</button>-->
+                    </div>
+                </form>
+            </div>
         </div>
+
     </div>
 </div>
 
+<script src="{{URL::asset('js/deleteRecord.js')}}"></script>
 <script type="text/javascript">
     $(document).ready(function(){  
         var i = {{count($questions[0]->questions)}};  
@@ -128,7 +133,7 @@
 
     });
 
-    function deleteRecord(question,url,tr){
+    /*function deleteRecord(question,url,tr){
         alert(question);
 
         Swal.fire({
@@ -169,8 +174,8 @@
                     swal("Error!",{icon: "error"});
                 });
             }
-        });
-    }  
+        }); 
+    } */
 </script>
 
 @endsection

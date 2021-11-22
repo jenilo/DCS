@@ -1,7 +1,7 @@
 <nav class="bg-white border-b border-gray-100">
     <div class="row g-0">
         <div class="navbar-brand m-0" style="width: 220px">
-            <h1 class="ml-4 my-auto">icon</h1>
+            <h1 class="ml-4 my-auto fw-bold text-center"><a class="text-aquablue text-decoration-none" href="{{route('home')}}"><i class="fas fa-tooth"></i> DCS</a></h1>
         </div>
         <div class="col d-flex justify-content-between">
             <button onclick="$('#sidebar').animate({width: 'toggle'},'medium');" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition">
@@ -30,8 +30,6 @@
                                 </a>
                             </form>
                         </li>
-                        <li class="dropdown-item">Another action</li>
-                        <li class="dropdown-item">Something else here</li>
                     </ul>
                 </div>
                 

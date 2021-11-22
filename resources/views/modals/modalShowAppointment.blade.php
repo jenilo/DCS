@@ -1,12 +1,12 @@
 <div class="modal fade" id="showAppointmentModal" tabindex="-1" aria-labelledby="showAppointmentLabel"   aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="showAppointmentLabel">Cita</h5>
+            <div class="modal-header border-0">
+                <h5 class="modal-title fw-bold" id="showAppointmentLabel">Cita</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             
-            <div class="modal-body">
+            <div class="modal-body py-0">
                 <div class="row g-0 mb-2">
                     <div class="d-flex">
                         <h1 class="mr-2 mb-0"><i class="far fa-user-circle" style="font-size: 80px;"></i></h1>
@@ -24,17 +24,17 @@
                     <h6 class="fw-bold">Tratamiento: <span class="fw-normal" id="treatment"> tratamiento</span></h6>
                     <h6 class="fw-bold">Notas:</h6>
                     <p id="notes">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi tempora temporibus amet maiores dolores placeat dolor, fugiat ut quo asperiores vitae aliquam ea, corporis rem, blanditiis sint. Illo, aliquid, fugit.</p>
-                    <div class="">
-                        <button id="addMedicalRecord" class="btn btn-success"><i class="fas fa-folder-plus"></i> Añadir registro médico</button>
-                        <button id="showMedicalRecord" class="btn btn-primary"><i class="far fa-folder-open"></i> Ver expediente</button>
-                    </div>
+                    {{--<div class="text-end">
+                        <button id="showMedicalRecord" class="btn text-white bg-aquablue"><i class="far fa-folder-open"></i> Ver expediente</button>
+                    </div>--}}
                     
                 </div>
             </div>
 
-            <div class="modal-footer">
-                <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cerrar</button>
-                <button type="submit" class="btn btn-primary">Actualizar</button>
+            <div class="modal-footer border-0">
+                <button type="button" class="btn btn-warning text-white" data-bs-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary fw-bold">Actualizar cita</button>
+                <button id="showMedicalRecord" class="btn text-white bg-aquablue"><i class="far fa-folder-open"></i> Ver expediente</button>
             </div>
         </div>
     </div>

@@ -18,7 +18,7 @@ class File extends Model
     //protected $hidden = [];
     // protected $dates = [];
 
-    public static function boot()
+    /*public static function boot()
     {
         parent::boot();
         static::deleting(function($obj) {
@@ -67,6 +67,6 @@ class File extends Model
         {
             $this->attributes[$attribute_name] = 'storage/species/fish.jpg';
         }
-    }
+    }*/
 
 }

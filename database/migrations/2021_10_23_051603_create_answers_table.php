@@ -16,8 +16,8 @@ class CreateAnswersTable extends Migration
         Schema::create('answers', function (Blueprint $table) {
             $table->id();
             $table->text('answer');
-            $table->foreignId('question_id')->constrained();
-            $table->foreignId('completed_form_id')->constrained();
+            $table->foreignId('question_id')->constrained()->onDelete('cascade');
+            $table->foreignId('completed_form_id')->constrained()->onDelete('cascade');
         });
     }
 

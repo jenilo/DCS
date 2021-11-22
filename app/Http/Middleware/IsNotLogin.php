@@ -7,11 +7,29 @@ use App\Enums\UserType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class SuperAdminAuth
+class IsNotLogin /*SuperAdminAuth*/
 {
 
+    private function checkIfUserIsLogin()//($user)
+    {
+        return Auth::user();
+    }
 
-    private function checkIfUserIsAdmin()//($user)
+    public function handle(Request $request, Closure $next)
+    {
+        if (auth()->guest()) {
+            //return $this->respondToUnauthorizedRequest($request);
+            return redirect()->route('home');
+        }
+
+        if ($this->checkIfUserIsLogin()) {//(backpack_user())) {
+            //return $this->respondToUnauthorizedRequest($request);
+            return redirect()->route('home');
+        }
+        return $next($request);
+    }
+
+    /*private function checkIfUserIsAdmin()//($user)
     {
         return Auth::user() && Auth::user()->role_id == UserType::SuperAdmin;
     }
@@ -22,9 +40,9 @@ class SuperAdminAuth
             return response(trans('backpack::base.unauthorized'), 401);
         } else {
             return redirect()->guest(backpack_url('login'));
-        }*/
+        }*//*
         return redirect()->route('login');
-    }
+    }*/
 
     /**
      * Handle an incoming request.
@@ -33,7 +51,7 @@ class SuperAdminAuth
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle(Request $request, Closure $next)
+    /*public function handle(Request $request, Closure $next)
     {
         if (auth()->guest()) {
             return $this->respondToUnauthorizedRequest($request);
@@ -44,5 +62,5 @@ class SuperAdminAuth
         }
 
         return $next($request);
-    }
+    }*/
 }

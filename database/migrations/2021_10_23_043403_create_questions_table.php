@@ -17,7 +17,7 @@ class CreateQuestionsTable extends Migration
             $table->id();
             $table->text('question');
             $table->foreignId('answer_type_id')->constrained();
-            $table->foreignId('form_id')->constrained();
+            $table->foreignId('form_id')->constrained()->onDelete('cascade');
         });
     }
 

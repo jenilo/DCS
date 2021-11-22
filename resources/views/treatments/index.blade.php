@@ -6,12 +6,9 @@
 	<div class="container bg-white p-4 rounded shadow">
       	<div class="row g-0">
       		<div class="col-md-8 col-12 my-auto">
-                <div id="table_id_filter" class="input-group">
-					<div class="input-group-prepend border-0">
-					<span class="input-group-text h-100 border-0 bg-white" id="basic-addon1"><i class="fas fa-search"></i></span>
-					</div>
-					<input type="search" aria-controls="table_id" class="form-control border-0" placeholder="Buscar tratamiento..." aria-label="Username" aria-describedby="basic-addon1">
-				</div>
+      			<h2 class="font-semibold text-xl text-gray-800 leading-tight mb-0">
+                    Tratamientos
+                </h2>
                 
             </div>
       		<div class="col-md-4 col-12 my-auto text-right">
@@ -32,9 +29,9 @@
 				        @if(isset($treatments) && count($treatments)>0)
             				@foreach ($treatments as $treatment)
 								<tr>
-									<th>{{$treatment->id}}</th>
-									<td>{{$treatment->name}}</td>
-									<td class="text-center">
+									<th class="fw-bold">{{$treatment->id}}</th>
+									<td class="fw-bold">{{$treatment->name}}</td>
+									<td class="fw-bold text-center">
 										<div class="dropdown" role="group">
 										    <button id="btnOptions" type="button" class="text-muted" data-bs-toggle="dropdown" aria-expanded="false">
 										    	<i class="fas fa-ellipsis-h"></i>
@@ -45,7 +42,7 @@
 										      	</li>
 										    	<li>
 										      		<a class="dropdown-item text-danger">
-										      		<button onclick="deleteRow({{$treatment->id}},this)"><i class="far fa-trash-alt"></i> Eliminar</button>
+										      		<button onclick="deleteRow('{{url('treatments')}}',{{$treatment->id}},this)"><i class="far fa-trash-alt"></i> Eliminar</button>
 										    		</a>
 										    	</li>
 										    </ul>
@@ -53,10 +50,6 @@
 									</td>
 								</tr>
 							@endforeach
-						@else
-                            <tr>
-                                <td colspan="3" rowspan="3" class="text-center"><h1>No hay tratamientos</h1></td>
-                            </tr>
                         @endif
 				    </tbody>
 				</table>
@@ -69,6 +62,7 @@
 
 @include('modals.modalAddTreatment')
 
+<script src="{{URL::asset('js/deleteRecord.js')}}"></script>
 <script>
 	$(function() {
 	    console.log( "ready!" );
@@ -76,7 +70,9 @@
 	});
 	var table = $('#table_id').DataTable({
 		language: {
-    		url: "https://cdn.datatables.net/plug-ins/1.11.3/i18n/es-mx.json"
+    		url: "https://cdn.datatables.net/plug-ins/1.11.3/i18n/es-mx.json",
+    		search: 'Buscar tratamiento:',
+    		searchPlaceholder: "Buscar..."
     	},
     	columns: [
 	    	{title: '#' },
@@ -87,11 +83,6 @@
     	'dom': '<<"float-start"f><"float-end"l><t>ip>'
 	    
     });
-    
-    function deleteRow(id,target){
-    	console.log(id);
-    	table.row( $(target).parents('tr') ).remove().draw();
-    }
 </script>
 
 @endsection

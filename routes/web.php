@@ -12,7 +12,7 @@ use App\Http\Controllers\FormController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\MedicalRecordController;
 use App\Http\Controllers\CompletedFormController;
-use App\Http\Controllers\File;
+use App\Http\Controllers\FileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,32 +25,40 @@ use App\Http\Controllers\File;
 |
 */
 
+/*Route::get('/', function () {
+    return view('welcome');
+});*/
+/*
+Route::get('sendmail', function() {
+    //
+});
+Route::prefix('superadmin')->middleware('ensureUserHasRole:'.UserType::SuperAdmin)->group(function () {
+    Route::get('/h',function (){
+        return 'Hello superadmin';
+    });
+});
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
+*/
+
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware('isNotLogin');
 
 Route::group(['prefix' => 'clinic'], function() {
     Route::post('register', [ClinicController::class, 'store']);
     Route::get('register', function() {return view('clinics.register');})->name('clinicregister');
 });
 
-Route::get('sendmail', function() {
-    //
-});
-
-/*Route::prefix('superadmin')->middleware('ensureUserHasRole:'.UserType::SuperAdmin)->group(function () {
-    Route::get('/h',function (){
-        return 'Hello superadmin';
-    });
-});*/
-
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::post('register', [ClinicController::class, 'store']);
+Route::get('register', function() {return view('clinics.register');})->name('register');
 
 Route::group(['middleware' => 'auth'], function () {
 
-    Route::get('users', [UserController::class, 'index'])->name('users');
+    //Route::get('users', [UserController::class, 'index'])->name('users');
+    Route::get('/home',[ClinicController::class,'show'])->name('home');
 
 
     Route::get('patients', [PatientController::class, 'index'])->name('patients'); //probablemente ocupe middleware despues
@@ -59,20 +67,31 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('patients/create', function (){ return view('patients.create'); })->name('createpatient');
         Route::post('patients', [PatientController::class, 'store']);
         Route::get('patient/{patient}', [PatientController::class, 'show'])->name('patient');
-        //Route::post('patient/completeform', [CompletedFormController::class, 'index'])->name('completeform');
         Route::get('patient/{medical_record}/form/{form}/create', [CompletedFormController::class, 'index'])->name('completeform');
         //Route::get('patient/{medical_record}/form/{form}/show', [CompletedFormController::class, 'show'])->name('showcompleteform');
         Route::get('patient/completedform/{completed_form}', [CompletedFormController::class, 'show'])->name('showcompletedform');
         Route::post('patient/completeform/create', [CompletedFormController::class, 'store'])->name('createcompleteform');
         Route::post('patient/completeform/update', [CompletedFormController::class, 'update'])->name('updatecompleteform');
+        Route::delete('patients/{patient}', [PatientController::class, 'destroy'])->name('patientdestroy');
 
         Route::post('patient/file/create',[FileController::class, 'store'])->name('createfile');
+    });
+
+    
+    Route::group(['middleware' => 'can:create user'], function(){
+        Route::get('users', [UserController::class, 'index'])->name('users');
+        Route::get('users/create', function (){ return view('users.create'); })->name('createuser');
+        //Route::get('users/appointments/{treatment}', [TreatmentController::class, 'appointments'])->name('treatmentappointments');
+        Route::post('users', [UserController::class, 'store']);
+        Route::delete('users/{user}', [UserController::class, 'destroy'])->name('userdestroy');
     });
 
     Route::get('treatments', [TreatmentController::class, 'index'])->name('treatments');
     Route::group(['middleware' => 'can:create treatment'], function(){
         Route::get('treatments/create', function (){ return view('treatments.create'); })->name('createtreatment');
+        //Route::get('treatments/appointments/{treatment}', [TreatmentController::class, 'appointments'])->name('treatmentappointments');
         Route::post('treatments', [TreatmentController::class, 'store']);
+        Route::delete('treatments/{treatment}', [TreatmentController::class, 'destroy'])->name('treatmentdestroy');
     });
 
     Route::get('forms', [FormController::class, 'index'])->name('forms');
@@ -84,8 +103,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('form/{form}/questions/edit', [QuestionController::class, 'edit'])->name('editquestions');
         Route::post('questions/edit', [QuestionController::class, 'update']);
         Route::delete('questions/{question}', [QuestionController::class, 'destroy'])->name('questiondestroy');
-        //Route::post('questions', [QuestionController::class, 'destroy'])->name('questiondestroy');
-
+        Route::delete('forms/{form}', [FormController::class, 'destroy'])->name('formdestroy');
     });
     
     

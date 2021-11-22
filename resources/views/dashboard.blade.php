@@ -1,15 +1,26 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+@extends('layouts.app')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <x-jet-welcome />
+@section('content')
+
+<div class="p-4">
+    <div class="container bg-white p-4 rounded shadow">
+        <div class="row g-0">
+            <div class="col-md-8 col-12 my-auto">
+                <div>
+                    <h3>{{$clinic->name}}</h3>
+                </div>
+                
+            </div>
+            <div class="col-md-4 col-12 my-auto text-right">
+                <button type="button" class="btn btn-primary bg-aquablue rounded-pill" data-bs-toggle="modal" data-bs-target="#addTreatmentModal"><i class="fas fa-plus"></i>&nbsp Añadir tratamiento</button>
             </div>
         </div>
+        <div class="row no-gutters">
+            
+
+        </div>
+        
     </div>
-</x-app-layout>
+</div>
+
+@endsection

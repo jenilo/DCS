@@ -36,6 +36,11 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'read appointment']);
         Permission::create(['name' => 'update appointment']);
         Permission::create(['name' => 'delete appointment']);
+        //user
+        Permission::create(['name' => 'create user']);
+        Permission::create(['name' => 'read user']);
+        Permission::create(['name' => 'update user']);
+        Permission::create(['name' => 'delete user']);
         //patient
         Permission::create(['name' => 'create patient']);
         Permission::create(['name' => 'read patient']);
@@ -77,6 +82,10 @@ class PermissionSeeder extends Seeder
             'read form',
             'update form',
             'delete form',
+            'create user',
+            'read user',
+            'update user',
+            'delete user',
         ]);
 
         $user->givePermissionTo([

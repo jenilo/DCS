@@ -18,6 +18,6 @@ class Form extends Model
     // protected $dates = [];
 
     public function questions(){
-        return $this->hasMany(Question::class);
+        return $this->hasMany(Question::class,'form_id');
     }
 }

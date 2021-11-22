@@ -12,6 +12,9 @@
 .text-darkblue{
 	color: #156995 !important;
 }
+.text-title{
+    font-size: 60px;
+}
 /*.filters-bar{
 	position: absolute;
 	z-index: 2;
@@ -99,13 +102,15 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
-  border: none
+  
 }
 #table_id table td, .rows th {
   padding: 8px;
 }
 
-#table_id table tr:nth-child(odd){background-color: #FAFAFC;}
+#table_id .odd{
+	background-color: #FAFAFC;
+}
 
 #table_id table tr:hover {background-color: #ddd;}
 
@@ -117,14 +122,37 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
   color: white;
 }
 
+#table_id td, th{
+	border: 0;
+}
+
 #table_id td:first-child,
 #table_id th:first-child {
   border-radius: 10px 0 0 10px;
+  background-color: transparent;
+  border: 0;
 }
 #table_id td:last-child,
 #table_id th:last-child {
   border-radius: 0 10px 10px 0;
+  border: 0;
 }
 #table_id tfoot th:first-child{
 	border-radius: 10px 10px 10px 10px;
+}
+#table_id th{
+	border:  0;
+}
+#table_id .odd .sorting_1{
+	background-color: #F4F4FB;
+}
+#table_id .even .sorting_1{
+	background-color: transparent;
+}
+#table_id .paginate_button .current{
+	background-color: red;
+}
+
+.dataTables_wrapper .dataTables_filter input[type=search]{
+	border: 0;
 }

@@ -40,7 +40,7 @@ class PatientController extends Controller
             return  Redirect::back()->with('error', "No se puede crear el paciente.");
 
         }
-        return Redirect::back()->with('error',Auth::user());
+        return Redirect::back()->with('error',"No tiene permiso para esto.");
     }
 
     public function search($name = null){
@@ -56,7 +56,29 @@ class PatientController extends Controller
         }
         else
             return abort(404, 'Page not found.');
-        //$count = Patient::selectRaw('count(patients.id) as count')->where('clinic_id','=',Auth::user()->clinic_id)->get()[0]->count;
         return view('patients.details',compact('patient','forms'));
+    }
+    
+    public function destroy($patient){
+
+        if (Auth::user()->hasPermissionTo('delete patient')) {
+            $patient = Patient::where('id','=',$patient)->first();
+            if ($patient != null) {
+                $count = Patient::selectRaw("count('patient_id') as count")->join('appointments','appointments.patient_id','=','patients.id')->where('patients.id','=',$patient->id)->groupBy('patient_id')->first();
+                if ($count == null) {
+                    if ($patient->delete()) {
+                        return response()->json(['code'=> '200','message'=>'Eliminado exitoso']);
+                    }
+                    return response()->json(['code'=> '400','message'=>'No se elimino el tratamiento.']);
+                }
+                else{
+                    return response()->json(['code'=> '400','message'=>'Este paciente tiene '.$count->count.' citas, no puede eliminarse.']);
+                }
+            }
+            else{
+                return response()->json(['code'=> '404','message'=>'Registro no encontrado.']);
+            }
+        }
+        return response()->json(['code'=> '400','message'=>'No tienes permiso para esto.']);
     }
 }

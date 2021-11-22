@@ -36,4 +36,42 @@ class TreatmentController extends Controller
         }
         return Redirect::back()->with('error',Auth::user());
     }
+
+    public function update(Request $request){
+        
+
+    }
+
+    public function appointments($treatment){
+        $treatmentExist = Treatment::where('id','=',$treatment)->first();
+        if ($treatmentExist!=null) {
+            $count = Treatment::selectRaw("count('treatment_id') as count")->join('appointments','appointments.treatment_id','=','treatments.id')->where('treatments.id','=',$treatment)->groupBy('treatment_id')->first();
+
+            return response()->json(['code'=> '400','message'=>$count]);
+        }
+        return response()->json(['code'=> '404']);
+    }
+
+    public function destroy($treatment){
+
+        if (Auth::user()->hasPermissionTo('delete treatment')) {
+            $treatment = Treatment::where('id','=',$treatment)->first();
+            if ($treatment != null) {
+                $count = Treatment::selectRaw("count('treatment_id') as count")->join('appointments','appointments.treatment_id','=','treatments.id')->where('treatments.id','=',$treatment->id)->groupBy('treatment_id')->first();
+                if ($count == null) {
+                    if ($treatment->delete()) {
+                        return response()->json(['code'=> '200','message'=>'Eliminado exitoso']);
+                    }
+                    return response()->json(['code'=> '400','message'=>'No se elimino el tratamiento.']);
+                }
+                else{
+                    return response()->json(['code'=> '400','message'=>'Este tratamiento tiene '.$count->count.' citas, no puede eliminarse.']);
+                }
+            }
+            else{
+                return response()->json(['code'=> '404','message'=>'Registro no encontrado.']);
+            }
+        }
+        return response()->json(['code'=> '400','message'=>'No tienes permiso para esto.']);
+    }
 }

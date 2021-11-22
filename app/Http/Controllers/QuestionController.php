@@ -46,7 +46,7 @@ class QuestionController extends Controller
     }
 
     public function edit(Form $form){
-        $questions = Form::with('questions')->get();
+        $questions = Form::with('questions')->where('id','=',$form->id)->get();
         $answertypes = AnswerType::all();
         return view('forms.edit', compact('form','questions','answertypes'));
     }

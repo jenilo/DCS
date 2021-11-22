@@ -6,11 +6,14 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Models\Clinic;
+use App\Models\User;
 use App\Mail\SendTokenToUser;
-
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use App\Enums\UserType;
+use Auth;
 
 class ClinicController extends Controller
 {
@@ -23,23 +26,31 @@ class ClinicController extends Controller
             //Validar los datos del request
             $validator = Validator::make($request->all(), [
                 'name' => 'required|unique:clinics|min:5|max:255',
+                'password' => 'required|min:6|max:255',
+                'email' => 'required|unique:users|email',
+                'nameUser' => 'required|min:10|max:255'
             ]);
             if ($validator->fails()) {
                 return  redirect()->back()->withErrors($validator)->withInput();
             }
-            //if($clinic = Clinic::create($request->all())){
-                $clinic = new Clinic();
-                $clinic->name = $request->name;
-                $clinic->token = Hash::make(Str::random(48));
-                //$clinic->path = Str::slug($clinic->name);
-                $clinic->path = Str::slug(Str::replace(' ', '', $clinic->name));
-                if($clinic->save()){
-                //$receivers = Receiver::pluck('email');
-                Mail::to('jennylopezu@gmail.com')->send(new SendTokenToUser());
+            $clinic = new Clinic();
+            $clinic->name = $request->name;
+            $clinic->token = Hash::make(Str::random(48));
+            $clinic->path = Str::slug(Str::replace(' ', '', $clinic->name));
+            if($clinic->save()){
                 //crear usuario tipo admin asignando token
-
-
-                return  redirect()->back()->with('success', 'Clinica creada satisfactoriamente.');
+                $user = new User();
+                $user->name = $request->nameUser;
+                $user->email = $request->email;
+                $user->password = Hash::make($request->password);
+                $user->role_id = UserType::Admin;
+                $user->clinic_id = $clinic->id;
+                $user->token = $clinic->token;
+                if ($user->save()) {
+                    return  redirect()->back()->with('success', 'Clinica creada satisfactoriamente.');
+                }
+                $clinic->delete();
+                return  redirect()->back()->with('error', 'No se puede crear la clinica.');
             }
           return  redirect()->back()->with('error', "No se puede crear la clinica.");
 
@@ -47,9 +58,10 @@ class ClinicController extends Controller
         return redirect()->back->with('error','No tienes permiso.');*/
     }
 
-    public function show(Clinic $clinic){
-
-        //return redirect()->back()->with('error','tipo de error');
+    public function show(){
+        $clinic = Clinic::where('id','=',Auth::user()->clinic_id)->first();
+        return view('dashboard',compact('clinic'));
+        
     }
 
     public function update(Request $request, Clinic $clinic){

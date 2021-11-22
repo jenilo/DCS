@@ -1,26 +1,26 @@
 <div class="modal fade" id="addFormModal" tabindex="-1" aria-labelledby="addFormLabel"   aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addFormLabel">Crear formulario</h5>
+            <div class="modal-header border-0">
+                <h5 class="modal-title fw-bold" id="addFormLabel">Crear formulario</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form method="POST" action="{{url('forms')}}" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
-                    <div class="mb-3 row">
-                        <label for="name" class="col-sm-4 col-form-label text-right">Nombre</label>
+                    <div class="mb-0 row">
+                        <label for="name" class="col-sm-4 col-form-label text-right fw-bold">Nombre</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" required>
+                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" placeholder="Cuestionario de evaluación..." required>
                              @error('name')
                                 <span class="invalid-feedback">{{$errors->first('name')}}</span>
                              @enderror
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Save</button>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-warning text-white" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary bg-aquablue">Guardar</button>
                 </div>
             </form>
         </div>
