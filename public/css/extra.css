@@ -15,6 +15,10 @@
 .text-title{
     font-size: 60px;
 }
+
+[type='checkbox'], [type='radio']{
+    color: #1FBDBE;
+}
 /*.filters-bar{
 	position: absolute;
 	z-index: 2;

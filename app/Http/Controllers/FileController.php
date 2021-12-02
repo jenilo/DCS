@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Models\File;
+use App\Models\MedicalRecord;
+use App\Models\Patient;
 use App\Models\Clinic;
+use App\Models\File;
 use Carbon\Carbon;
 use Auth;
 
@@ -40,6 +43,41 @@ class FileController extends Controller
         }
 
         Storage::delete($path);
-        return Redirect::back()->with(['code'=> '200','message'=>'error al subir el archivo']);
+        return Redirect::back()->with(['code'=> '400','message'=>'error al subir el archivo']);
+    }
+
+    function odontogram($patient){
+        $patient = Patient::where('id','=',$patient)->first();
+        $medical_record = MedicalRecord::where('patient_id','=',$patient->id)->first();
+        return view('forms.odontogram',compact('patient','medical_record'));
+    }
+
+    function storeOdontogram(Request $request){
+        $date = Carbon::now();
+        $date = $date->toDateString();
+        $clinic = Clinic::where('id','=',Auth::user()->clinic_id)->first();
+
+        $img = $request->imgBase64;
+        $imageName = Str::random(10).'.'.'png';
+        $img = Str::replace('data:image/png;base64,', '', $img);
+        $img = Str::replace(' ', '+', $img);
+        $data = base64_decode($img);
+        $path = Storage::put('public/'.$clinic->path.'/'.$imageName, $data);
+        if ($path == 1)
+            $path = 'public/'.$clinic->path.'/'.$imageName;
+        else
+            return json_encode(['code'=> '400','message'=>'error al subir el archivo']);
+            
+        $file = new File();
+        $file->name = $request->name;
+        $file->filePath = $path;
+        $file->medical_record_id = $request->medical_record_id;
+        $file->saveDate = $date;
+        if($file->save()){
+            return json_encode(['code'=> '200','message'=>'archivo subido con exito']);
+        }
+
+        Storage::delete($path);
+        return json_encode(['code'=> '400','message'=>'error al subir el archivo']);
     }
 }

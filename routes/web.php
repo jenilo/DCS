@@ -47,18 +47,21 @@ Route::get('/', function () {
     return view('welcome');
 })->middleware('isNotLogin');
 
-Route::group(['prefix' => 'clinic'], function() {
+/*Route::group(['prefix' => 'clinic'], function() {
     Route::post('register', [ClinicController::class, 'store']);
     Route::get('register', function() {return view('clinics.register');})->name('clinicregister');
-});
+    Route::get('register', function() {return view('clinics.register');})->name('clinicregister');
+});*/
 
 Route::post('register', [ClinicController::class, 'store']);
-Route::get('register', function() {return view('clinics.register');})->name('register');
+/*Route::get('register', function() {return view('clinics.register');})->name('register');
+Route::get('login', function() {return view('clinics.login');})->name('login');*/
 
 Route::group(['middleware' => 'auth'], function () {
 
     //Route::get('users', [UserController::class, 'index'])->name('users');
-    Route::get('/home',[ClinicController::class,'show'])->name('home');
+    Route::get('/clinic',[ClinicController::class,'show'])->name('clinic');
+    Route::get('/home',[ClinicController::class,'index'])->name('home');
 
 
     Route::get('patients', [PatientController::class, 'index'])->name('patients'); //probablemente ocupe middleware despues
@@ -74,7 +77,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('patient/completeform/update', [CompletedFormController::class, 'update'])->name('updatecompleteform');
         Route::delete('patients/{patient}', [PatientController::class, 'destroy'])->name('patientdestroy');
 
+        //Route::get('patient/{patient}/odontogram', function() {return view('forms.odontogram');})->name('odontogram');
+        Route::get('patient/{patient}/odontogram', [FileController::class, 'odontogram'])->name('odontogram');
+
         Route::post('patient/file/create',[FileController::class, 'store'])->name('createfile');
+        Route::post('patient/odontogram/create',[FileController::class, 'storeOdontogram'])->name('createodontogram');
     });
 
     

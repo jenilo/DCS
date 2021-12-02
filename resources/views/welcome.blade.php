@@ -21,6 +21,9 @@
             body {
                 font-family: 'Nunito', sans-serif;
             }
+            a:hover {
+                color: #4a5568
+            }
             /*.text-aquablue{
                 color: #1FBDBE !important;
             }
@@ -38,16 +41,15 @@
             @if (Route::has('login'))
                 <div class="fixed top-0 right-0 px-6 py-4 sm:block">
                     <a href="{{ route('login') }}" class="btn bg-aquablue text-sm text-white rounded-pill">Iniciar sesión</a>
-
                     @if (Route::has('register'))
-                        <a href="{{ route('register') }}" class="ml-4 text-sm fw-bold text-gray-700 underline">Registrar</a>
+                        <a href="{{ route('register') }}" class="text-decoration-none ml-4 text-sm fw-bold text-gray-700 hover:text-gray-900">Registrar</a>
                     @endif
                 </div>
             @endif
 
-            <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
+            <div class="max-w-6xl mx-auto my-auto sm:px-6 lg:px-8">
                 <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
-                    <span class="ml-4 mt-4 my-auto text-title"><a class="text-aquablue text-decoration-none" href="{{route('home')}}"><i class="fas fa-tooth"></i> DCS</a></span>
+                    <span class="ml-4 mt-4 my-auto text-title"><a class="text-aquablue text-decoration-none fw-bold" href="{{route('home')}}"><i class="fas fa-tooth"></i> DCS</a></span>
                 </div>
 
                 <div class="mt-8 bg-white overflow-hidden shadow sm:rounded-lg">

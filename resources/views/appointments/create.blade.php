@@ -21,7 +21,7 @@
                         <div class="col-sm-8">
                             <div class="d-flex">
                                 <input type="text" class="d-inline-flex form-control mr-2 @error('patient_id') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" disabled>
-                                <button type="button" class="d-inline-flex btn btn-primary ml-2" data-bs-toggle="modal" data-bs-target="#addSearchPatientModal" onclick="getPatients('')">Seleccionar</button>
+                                <button type="button" class="d-inline-flex btn btn-primary bg-aquablue bg-white ml-2 text-aquablue" data-bs-toggle="modal" data-bs-target="#addSearchPatientModal" onclick="getPatients('')">Seleccionar</button>
                                 <input type="hidden" name="patient_id" value="{{old('patient_id')}}">
                             </div>
                             @error('patient_id')

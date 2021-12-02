@@ -22,7 +22,7 @@
                                     <th scope="col">Tipo</th>
                                     <th scope="col">
                                         <!--<button id="add" type="button" class="btn btn-success"><i class="fas fa-plus"></i> Añadir</button>-->
-                                        <button id="add" type="button" class="btn btn-primary bg-aquablue rounded-pill"><i class="fas fa-plus"></i>&nbsp Añadir</button>
+                                        <button id="add" type="button" class="btn btn-primary bg-aquablue bg-white text-aquablue fw-bold rounded-pill"><i class="fas fa-plus"></i>&nbsp Añadir</button>
                                     </th>
                                 </tr>
                             </thead>
@@ -40,7 +40,7 @@
                                             <input type="hidden" name="inputs[{{$loop->iteration-1}}][id]" value="{{$question->id}}">
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-danger" onclick="deleteRecord('{{$question->id}}','{{url('questions')}}','{{$loop->iteration}}')"><i class="fas fa-minus"></i> Eliminar</button>
+                                            <button type="button" class="btn btn-danger bg-white text-danger fw-bold" onclick="deleteRecord('{{$question->id}}','{{url('questions')}}','{{$loop->iteration}}')"><i class="fas fa-minus"></i> Eliminar</button>
                                         </td>
                                     </tr>
                                 @endforeach

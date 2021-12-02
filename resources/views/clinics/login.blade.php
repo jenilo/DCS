@@ -1,4 +1,4 @@
-<x-guest-layout>
+{{--<x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
             <span class="ml-4 mt-4 my-auto fw-bold text-title"><a class="text-aquablue text-decoration-none" href="{{route('home')}}"><i class="fas fa-tooth"></i> DCS</a></span>
@@ -39,10 +39,10 @@
                     </a>
                 @endif
 
-                <x-jet-button class="ml-4 bg-aquablue">
+                <x-jet-button class="ml-4">
                     {{ __('Log in') }}
                 </x-jet-button>
             </div>
         </form>
     </x-jet-authentication-card>
-</x-guest-layout>
+</x-guest-layout>--}}

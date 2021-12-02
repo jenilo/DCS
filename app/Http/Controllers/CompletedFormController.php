@@ -1,12 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\Form;
 use App\Models\Answer;
+use App\Models\Patient;
 use App\Models\Question;
 use App\Models\CompletedForm;
 use App\Models\MedicalRecord;
+
 use Carbon\Carbon;
 use Auth;
 
@@ -27,11 +30,10 @@ class CompletedFormController extends Controller
 
     public function store(Request $request){
         //cambiar a create completeform
-        if(Auth::user()->hasPermissionTo('create appointment')){
-
+        if(Auth::user()->hasPermissionTo('create form')){
+            //return $request;
             $date = Carbon::now();
             $date = $date->toDateString();
-
             $completedForm = new CompletedForm();
             $completedForm->saveDate = $date;
             $completedForm->medical_record_id = $request->medical_record_id;
@@ -39,18 +41,17 @@ class CompletedFormController extends Controller
             if($completedForm->save()){
                 foreach($request->response as $key => $value){
                     $answer = new Answer();
-                    $answer->answer = $value;
+                    $answer->answer = ($value != null || $value != "")? $value : -1;
                     $answer->question_id = $key;
                     $answer->completed_form_id = $completedForm->id;
                     $answer->save();
                 }
-                //return redirect()->back()->with('succes', "Formulario completo.");
-                return response()->json(['code'=> '200','message'=>'Formulario completo']);
+                return redirect()->route('patient',$request->patient_id)->with(['code'=> '200', 'short' => 'Exitoso!','message'=>'Formulario completo']);
             }
             else
-                return response()->json(['code'=> '400','message'=>'No se puede completar el formulario']);
+                return redirect()->back()->with(['code'=> '400','message'=>'No se puede completar el formulario']);
         }
-        return response()->json(['code'=> '400','message'=>'No tienes permiso']);
+        return redirect()->route('patient',$request->patient_id)->with(['code'=> '400','message'=>'No tienes permiso']);
     }
 
     public function show($completed_form){

@@ -19,6 +19,8 @@ class ClinicController extends Controller
 {
     public function index(){
         //return view();
+        $clinic = Clinic::where('id','=',Auth::user()->clinic_id)->first();
+        return view('dashboard',compact('clinic'));
     }
 
     public function store(Request $request){
@@ -26,7 +28,7 @@ class ClinicController extends Controller
             //Validar los datos del request
             $validator = Validator::make($request->all(), [
                 'name' => 'required|unique:clinics|min:5|max:255',
-                'password' => 'required|min:6|max:255',
+                'password' => 'required|min:6|max:255|confirmed',
                 'email' => 'required|unique:users|email',
                 'nameUser' => 'required|min:10|max:255'
             ]);
@@ -47,7 +49,7 @@ class ClinicController extends Controller
                 $user->clinic_id = $clinic->id;
                 $user->token = $clinic->token;
                 if ($user->save()) {
-                    return  redirect()->back()->with('success', 'Clinica creada satisfactoriamente.');
+                    return  redirect('login')->with('success', 'Clinica creada satisfactoriamente.');
                 }
                 $clinic->delete();
                 return  redirect()->back()->with('error', 'No se puede crear la clinica.');
@@ -60,7 +62,7 @@ class ClinicController extends Controller
 
     public function show(){
         $clinic = Clinic::where('id','=',Auth::user()->clinic_id)->first();
-        return view('dashboard',compact('clinic'));
+        return view('clinics.index',compact('clinic'));
         
     }
 

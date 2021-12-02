@@ -51,20 +51,18 @@
                 <div class="row g-0">{{-->class="wrapper d-flex align-items-stretch"--}}
                     @include('sidebar')
                     <div class="col">
-                        @if(session('success'))
-                            <div class="alert alert-success alert-dismissible fade show mb-0" role="alert">
-                                <strong>{{session('success')}}</strong> 
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                        @elseif(session('error'))
-                            <div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
-                                <strong>{{session('error')}}</strong> 
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
+                        @if(session('code'))
+                            @if(session('code') == 200)
+                                <div class="alert alert-success alert-dismissible fade show" role="alert" style="position: absolute; width: 50%; right: 20px; margin-top: 20px;">
+                                    <i class="far fa-check-circle"></i> &nbsp; <span class="fw-bold mr-3">{{session('short')}}</span> {{ session('message') }}.
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            @else
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <i class="far fa-times-circle"></i></i> &nbsp; <span class="fw-bold mr-3">{{session('short')}}</span> {{ session('message') }}.
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            @endif
                         @endif
                         @yield('content')
                     </div>
@@ -76,7 +74,7 @@
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script type="text/javascript">
             if($('.alert')) {
-                setTimeout(function(){$(".alert").hide();}, 30000);
+                setTimeout(function(){$(".alert").hide();}, 500000);
             }
         </script>
         @livewireScripts

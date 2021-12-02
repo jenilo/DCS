@@ -7,7 +7,7 @@
     <div class="container bg-white p-4 rounded shadow">
         <div class="row g-0">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-0 fw-bold">
-                Crear paciente
+                Crear usuario
             </h2>
         </div>
         
