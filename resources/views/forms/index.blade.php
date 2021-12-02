@@ -6,13 +6,9 @@
 	<div class="container bg-white p-4 rounded shadow">
       	<div class="row g-0">
       		<div class="col-md-8 col-12 my-auto">
-                <div id="table_id_filter" class="input-group">
-					<div class="input-group-prepend border-0">
-					<span class="input-group-text h-100 border-0 bg-white" id="basic-addon1"><i class="fas fa-search"></i></span>
-					</div>
-					<input type="search" aria-controls="table_id" class="form-control border-0" placeholder="Buscar Formulario..." aria-label="Username" aria-describedby="basic-addon1">
-				</div>
-                
+      			<h2 class="font-semibold text-xl text-gray-800 leading-tight mb-0">
+                    Formularios
+                </h2>
             </div>
       		<div class="col-md-4 col-12 my-auto text-right">
                 <button type="button" class="btn btn-primary bg-aquablue rounded-pill" data-bs-toggle="modal" data-bs-target="#addFormModal"><i class="fas fa-plus"></i>&nbsp Crear formulario</button>
@@ -68,7 +64,9 @@
 <script>
 	var table = $('#table_id').DataTable({
 		language: {
-    		url: "https://cdn.datatables.net/plug-ins/1.11.3/i18n/es-mx.json"
+    		url: "https://cdn.datatables.net/plug-ins/1.11.3/i18n/es-mx.json",
+    		search: 'Buscar formularios:',
+    		searchPlaceholder: "Formulario..."
     	},
     	columns: [
 	    	{title: '#' },
@@ -80,10 +78,6 @@
 	    
     });
     
-    /*function deleteRow(id,target){
-    	console.log(id);
-    	table.row( $(target).parents('tr') ).remove().draw();
-    }*/
 </script>
 
 @include('modals.modalAddForm')

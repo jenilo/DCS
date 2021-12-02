@@ -38,11 +38,11 @@ class QuestionController extends Controller
             }
 
             //return  Redirect::back()->with('error', "No se puede crear las preguntas.");
-            return response()->json('error', "No se puede crear las preguntas");
+            return response()->json(['code'=> '200','message'=>'Creación exitosa.']);
 
         }
         //return Redirect::back()->with('error',"No tiene permisos.");
-        return response()->json('error', "No tiene permisos");
+        return response()->json(['code'=> '400','message'=>"No tiene permisos"]);
     }
 
     public function edit(Form $form){

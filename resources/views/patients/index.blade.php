@@ -9,12 +9,6 @@
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-0">
                     Pacientes
                 </h2>
-                {{--<div class="input-group">
-					<div class="input-group-prepend border-0">
-					<span class="input-group-text h-100 border-0 bg-white" id="basic-addon1"><i class="fas fa-search"></i></span>
-					</div>
-					<input type="text" class="form-control border-0" placeholder="Buscar pacientes..." aria-label="Username" aria-describedby="basic-addon1">
-				</div>--}}
             </div>
       		<div class="col-md-4 col-12 my-auto text-right">
                 <a type="button" class="btn btn-primary bg-aquablue rounded-pill" href="{{route('createpatient')}}"><i class="fas fa-plus"></i>&nbsp Añadir paciente</a>
@@ -82,6 +76,11 @@
 <script src="{{URL::asset('js/deleteRecord.js')}}"></script>
 <script>
     var table = $('#table_id').DataTable({
+    	language: {
+    		url: "https://cdn.datatables.net/plug-ins/1.11.3/i18n/es-mx.json",
+    		search: 'Buscar pacientes:',
+    		searchPlaceholder: "Paciente..."
+    	},
     	columns: [
 	    	{title: '#' },
 	    	{title: 'Nombre' },

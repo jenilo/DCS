@@ -16,11 +16,16 @@
             </div>
         </div>
         <div class="row no-gutters">
-            
-
+            <div class="col">
+                <canvas id=""></canvas>
+            </div>
         </div>
         
     </div>
 </div>
+
+<script type="text/javascript">
+    
+</script>
 
 @endsection

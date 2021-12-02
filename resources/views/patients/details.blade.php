@@ -79,10 +79,13 @@
 				@if(count($patient->medical_records->forms_completed) > 0)
 					<div class="row row-cols-2 row-cols-lg-6 row-cols-md-8 row-cols-sm-4 no-gutters p-2">
 						@foreach($patient->medical_records->forms_completed as $form_completed)
-							<a href="{{route('showcompletedform',$form_completed->id)}}" class="text-decoration-none" data-toggle="tooltip" data-placement="top" title="Fecha: {{$form_completed->saveDate}}">
+						<div class="mb-2">
+							<a href="{{route('showcompletedform',$form_completed->id)}}" class="text-decoration-none mb-2" data-toggle="tooltip" data-placement="top" title="Fecha: {{$form_completed->saveDate}}">
 								<img class="mx-auto" src="{{asset('icons/form.png')}}" style="width: 120px;" alt="">
 								<h6 class="fw-bold text-muted text-center mb-0 mt-2">{{$form_completed->form->name}}</h6>
 							</a>
+						</div>
+							
 						@endforeach
 					</div>
 				@else
@@ -136,7 +139,6 @@
     });
 
     function openImage(url){
-    	console.log("Hola");
     	$('#viewImageModal').modal('show');
     	$('#viewImageModal #img').attr("src",url);
     }

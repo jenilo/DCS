@@ -9,7 +9,6 @@
       			<h2 class="font-semibold text-xl text-gray-800 leading-tight mb-0">
                     Tratamientos
                 </h2>
-                
             </div>
       		<div class="col-md-4 col-12 my-auto text-right">
                 <button type="button" class="btn btn-primary bg-aquablue rounded-pill" data-bs-toggle="modal" data-bs-target="#addTreatmentModal"><i class="fas fa-plus"></i>&nbsp Añadir tratamiento</button>
@@ -72,7 +71,7 @@
 		language: {
     		url: "https://cdn.datatables.net/plug-ins/1.11.3/i18n/es-mx.json",
     		search: 'Buscar tratamiento:',
-    		searchPlaceholder: "Buscar..."
+    		searchPlaceholder: "Tratamiento..."
     	},
     	columns: [
 	    	{title: '#' },

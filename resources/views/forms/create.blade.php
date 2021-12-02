@@ -67,7 +67,7 @@
                     </div>
                     <div class="col-md-4">
                         <label for="answer_type_id" class="col-md-4 col-form-label">Tipo:</label>
-                        <select class="col-md-4 form-control" name="inputs.`+i+`.answer_type_id" id="answer_type_id`+i+`" required>
+                        <select class="col-md-4 form-control" name="inputs[`+i+`][answer_type_id]" id="answer_type_id`+i+`" required>
                             <option selected disabled>Elegir</option>
                             @foreach($answertypes as $answerType)
                                 <option value="{{$answerType->id}}">{{$answerType->answerType}}</option>
