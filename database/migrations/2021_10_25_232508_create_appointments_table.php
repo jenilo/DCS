@@ -17,7 +17,6 @@ class CreateAppointmentsTable extends Migration
             $table->id();
             $table->date('date');
             $table->time('timeStart');
-            $table->time('timeEnd');
             $table->text('notes')->nullable();
             $table->foreignId('patient_id')->constrained();
             $table->foreignId('treatment_id')->constrained();

@@ -47,6 +47,9 @@ document.addEventListener('DOMContentLoaded', function() {
 			if (moment().isSame(info.dateStr,'day') || moment(info.dateStr).isAfter(moment()))
 				window.location.href = '/appointments/create/'+info.dateStr;
 		},
+		eventMouseEnter: function (mouseEnterInfo){
+			console.log(mouseEnterInfo);
+		},
 		eventClick: function (params){
 			console.log(params);
 			axios.get('http://127.0.0.1:8000/appointments/show/'+params.event.id).then(function (response) {

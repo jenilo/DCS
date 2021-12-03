@@ -19,6 +19,10 @@
 [type='checkbox'], [type='radio']{
     color: #1FBDBE;
 }
+.fc-day:hover{
+	background: #F8F9FA;
+	cursor: pointer;
+}
 /*.filters-bar{
 	position: absolute;
 	z-index: 2;

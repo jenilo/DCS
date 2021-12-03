@@ -1,5 +1,4 @@
 function deleteRecord(identifier,url,tr){
-    alert(identifier);
 
     Swal.fire({
         title: '¿Esta seguro?',

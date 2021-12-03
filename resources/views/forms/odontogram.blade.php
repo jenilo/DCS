@@ -17,6 +17,7 @@
 				</div>
 				<div class="col mx-5">
                 	<input type="hidden" name="medical_record_id" value="{{$medical_record->id}}">
+                	<input type="hidden" name="patient_id" value="{{$patient->id}}">
                 	<a href="{{ url()->previous() }}" class="btn btn-warning text-white">Cancelar</a>
                     <button type="submit" class="btn btn-primary bg-aquablue">Guardar</button>
 				</div>
@@ -147,7 +148,14 @@
 		console.log(data);
 		axios.post("{{route('createodontogram')}}", data)
 		.then(function (response) {
-		    console.log(response);
+			//console.log(response.data);
+		    Swal.fire({
+			    title: response.data.short,
+			    text: response.data.message,
+			    type: "success"
+			}).then(function() {
+			    window.location.href = response.data.url;
+			});
 		})
 		.catch(function (error) {
 		    console.log(error);

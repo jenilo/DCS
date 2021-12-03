@@ -63,15 +63,6 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="timeEnd" class="col-sm-4 col-form-label text-right fw-bold">Hora</label>
-                        <div class="col-sm-8">
-                            <input type="time" class="form-control @error('timeEnd') is-invalid @enderror" name="timeEnd" value="{{ old('timeEnd') }}" required>
-                            @error('timeEnd')
-                                <span class="invalid-feedback">{{$errors->first('timeEnd')}}</span>
-                             @enderror
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
                         <label for="notes" class="col-sm-4 col-form-label text-right fw-bold">Notas</label>
                         <div class="col-sm-8">
                             <textarea name="notes" class="form-control @error('notes') is-invalid @enderror">{{ old('notes') }}</textarea>

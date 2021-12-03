@@ -48,7 +48,6 @@ class AppointmentController extends Controller
             $validator = Validator::make($request->all(), [
                 'date' => 'required|date',
                 'timeStart' => 'required',
-                'timeEnd' => 'required',
                 'notes' => 'nullable|string',
                 'patient_id' => 'required',
                 'treatment_id' => 'required'
@@ -61,15 +60,14 @@ class AppointmentController extends Controller
 
             //if () {
                 if($appointment = Appointment::create($request->all()))
-                    return  redirect()->back()->with('success', 'Cita creada satisfactoriamente.');
+                    //return  redirect()->back()->with('success', 'Cita creada satisfactoriamente.');
+                    return redirect()->route('appointments')->with(['code'=> '200', 'short' => 'Exitoso!','message'=>'Cita creada']);
                 else
-                    return  redirect()->back()->with('error', "No se puede crear la cita.");
+                    return  redirect()->back()->with(['code'=> '400', 'short' => 'Error!','message'=>'No se puede crear la cita']);
             //}
-            
-          
 
         }
-        return redirect()->back->with('error','No tienes permiso.');
+        return redirect()->back()->with(['code'=> '400', 'short' => 'Error!','message'=>'No tienes permiso']);
     }
 
 }

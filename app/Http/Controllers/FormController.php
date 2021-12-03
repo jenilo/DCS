@@ -31,7 +31,7 @@ class FormController extends Controller
             if($form = Form::create($request->all() + ['clinic_id' => Auth::user()->clinic_id]))
                 return  redirect()->route('createquestions',['form' => $form->id]);
 
-            return  Redirect::back()->with('error', "No se puede crear el paciente.");
+            return  Redirect::back()->with('error', "No se puede crear el formulario.");
 
         }
         return Redirect::back()->with('error',"No tiene permisos");

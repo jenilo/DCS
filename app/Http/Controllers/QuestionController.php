@@ -38,11 +38,11 @@ class QuestionController extends Controller
             }
 
             //return  Redirect::back()->with('error', "No se puede crear las preguntas.");
-            return response()->json(['code'=> '200','message'=>'Creación exitosa.']);
+            return response()->json(['code'=> '200','short'=>'Exito','message'=>'Creación exitosa.']);
 
         }
         //return Redirect::back()->with('error',"No tiene permisos.");
-        return response()->json(['code'=> '400','message'=>"No tiene permisos"]);
+        return response()->json(['code'=> '400','short'=>'Error','message'=>"No tiene permisos"]);
     }
 
     public function edit(Form $form){
@@ -79,14 +79,14 @@ class QuestionController extends Controller
                     ]);
                 }
             }
-            return response()->json(['code'=> '200','message'=>'Edición exitosa']);
+            return response()->json(['code'=> '200','short'=>'Exito','message'=>'Edición exitosa']);
 
             //return  Redirect::back()->with('error', "No se puede crear las preguntas.");
-            return response()->json(['code'=> '400','message'=>'No se puede crear las preguntas']);
+            return response()->json(['code'=> '400','short'=>'Error','message'=>'No se puede crear las preguntas']);
 
         }
         //return Redirect::back()->with('error',"No tiene permisos.");
-        return response()->json(['code'=> '400','message'=>'No tienes permisos']);
+        return response()->json(['code'=> '400','short'=>'Error','message'=>'No tienes permisos']);
     }
 
     public function destroy(Question $question){

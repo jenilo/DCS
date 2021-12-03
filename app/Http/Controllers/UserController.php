@@ -37,8 +37,35 @@ class UserController extends Controller
             $user->role_id = UserType::User;
             $user->token = Auth::user()->token;
             $user->clinic_id = Auth::user()->clinic_id;
-            if($user->save())
+            if($user->save()){
+                $user->givePermissionTo([
+                    'crud users for clinic',
+                    'read clinic',
+                    'update clinic',
+                    'delete clinic',
+                    'create appointment',
+                    'read appointment',
+                    'update appointment',
+                    'delete appointment',
+                    'create patient',
+                    'read patient',
+                    'update patient',
+                    'delete patient',
+                    'create treatment',
+                    'read treatment',
+                    'update treatment',
+                    'delete treatment',
+                    'create form',
+                    'read form',
+                    'update form',
+                    'delete form',
+                    'create user',
+                    'read user',
+                    'update user',
+                    'delete user',
+                ]);
                 return  Redirect::back()->with('success', 'Usuario creado satisfactoriamente.');
+            }
 
             return  Redirect::back()->with('error', "No se puede crear el usuario.");
 

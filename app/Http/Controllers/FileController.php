@@ -66,7 +66,7 @@ class FileController extends Controller
         if ($path == 1)
             $path = 'public/'.$clinic->path.'/'.$imageName;
         else
-            return json_encode(['code'=> '400','message'=>'error al subir el archivo']);
+            return response()->json(['code'=> '400','short'=>'Error','message'=>'Error al subir el archivo']);
             
         $file = new File();
         $file->name = $request->name;
@@ -74,10 +74,10 @@ class FileController extends Controller
         $file->medical_record_id = $request->medical_record_id;
         $file->saveDate = $date;
         if($file->save()){
-            return json_encode(['code'=> '200','message'=>'archivo subido con exito']);
+            return response()->json(['code'=> '200','short'=>'Exito','message'=>'Archivo subido con exito','url' => route('patient',['patient' => $request->patient_id])]);
         }
 
-        Storage::delete($path);
-        return json_encode(['code'=> '400','message'=>'error al subir el archivo']);
+        //Storage::delete($path);
+        return response()->json(['code'=> '400','short'=>'Error','message'=>'error al subir el archivo']);
     }
 }

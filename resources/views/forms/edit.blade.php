@@ -99,20 +99,17 @@
                     $('#save').attr('disabled','disabled');
                 },
             }).done(function(data){
-                console.log(data);
+                //console.log(data);
                 //errors(data);
-                $('#save').attr('disabled', false);
+                //$('#save').attr('disabled', false);
+                Swal.fire({
+                    title: data.short,
+                    text: data.message,
+                    type: "success"
+                }).then(function() {
+                    window.location.href = "{{route('forms')}}";
+                });
             });
-
-            //console.log($(this).serialize());
-
-            /*axios.post('{{ url("questions/edit") }}',$(this).serialize()).then(function (response) {
-                console.log(response.data);
-            })
-            .catch(function (error) {
-                console.log(error);
-                swal("Error!",{icon: "error"});
-            });*/
 
         }); 
 
@@ -120,62 +117,15 @@
             $.each( data, function( key, value ) {
                 var id = key.split('inputs.').pop()[0];
                 var type = key.split('.').pop().split('.')[0];
-                //console.log(id);
-                //console.log('#'+type+id);
 
                 $('#'+type+id).addClass("is-invalid");
-                $('#span.'+type+id).text("Hola");
-                console.log($('#span'+type+id));
-                //console.log($('#'+type+id));
+                $('#span.'+type+id).text("");
+                //console.log($('#span'+type+id));
             });
         }
 
 
     });
-
-    /*function deleteRecord(question,url,tr){
-        alert(question);
-
-        Swal.fire({
-            title: '¿Esta seguro?',
-            text: "No se puede revertir esta acción.",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Si eliminar'
-        }).then((result) => {
-            if (result.isConfirmed) {
-
-                axios.delete(url+"/"+question,{
-                    id: question,
-                    _token:'{{ csrf_token() }}',
-                }).then(function (response) {
-                    console.log(response.data);
-                    if(response.data.code == '200'){
-                        Swal.fire(
-                            'Eliminado!',
-                            response.data.message,
-                            'success'
-                        );
-                        $('#'+tr).remove();
-                    }
-                    else{
-                        Swal.fire(
-                            'Error!',
-                            response.data.message,
-                            'error'
-                        );
-                    }
-
-                })
-                .catch(function (error) {
-                    console.log(error);
-                    swal("Error!",{icon: "error"});
-                });
-            }
-        }); 
-    } */
 </script>
 
 @endsection

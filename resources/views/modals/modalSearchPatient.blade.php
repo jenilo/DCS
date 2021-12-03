@@ -35,7 +35,7 @@
                     </div>   
                 </div>
                 <div class="modal-footer">
-                    <button type="button" onclick="" data-bs-dismiss="modal" class="btn btn-primary">Seleccionar</button>
+                    <button type="button" onclick="" data-bs-dismiss="modal" class="btn btn-primary bg-aquablue">Seleccionar</button>
                 </div>
             
         </div>

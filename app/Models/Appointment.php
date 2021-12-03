@@ -13,7 +13,7 @@ class Appointment extends Model
     // protected $primaryKey = 'id';
     public $timestamps = false;
     protected $guarded = ['id'];
-    protected $fillable = ['date','timeStart','timeEnd','notes','patient_id','treatment_id'];
+    protected $fillable = ['date','timeStart','notes','patient_id','treatment_id'];
     //protected $hidden = [];
     // protected $dates = [];
 

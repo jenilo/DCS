@@ -101,7 +101,15 @@
             }).done(function(data){
                 console.log(data);
                 errors(data);
-                $('#save').attr('disabled', false);
+                //$('#save').attr('disabled', false);
+                
+                Swal.fire({
+                    title: data.short,
+                    text: data.message,
+                    type: "success"
+                }).then(function() {
+                    window.location.href = "{{route('forms')}}";
+                });
             });
 
         }); 
@@ -115,7 +123,7 @@
 
                 $('#'+type+id).addClass("is-invalid");
                 $('#span.'+type+id).text("Hola");
-                console.log($('#span'+type+id));
+                //console.log($('#span'+type+id));
                 //console.log($('#'+type+id));
             });
         }
