@@ -16,9 +16,6 @@
             </div>
         </div>
         <div class="row no-gutters">
-            <div class="col">
-                <canvas id=""></canvas>
-            </div>
         </div>
         
     </div>

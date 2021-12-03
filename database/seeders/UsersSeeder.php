@@ -26,7 +26,7 @@ class UsersSeeder extends Seeder
         $user->save();
 
         $user = new User();
-        $user->name = "Admin";
+        $user->name = "Juan Osorio";
         //$user->username = "adminusername";
         $user->email = "admin@mail.com";
         $user->password = Hash::make("secret");
@@ -37,7 +37,7 @@ class UsersSeeder extends Seeder
         $user->save();
 
         $user = new User();
-        $user->name = "Client";
+        $user->name = "Usuario";
         //$user->username = "username";
         $user->email = "user@mail.com";
         $user->password = Hash::make("secret");
@@ -46,5 +46,17 @@ class UsersSeeder extends Seeder
         $user->token = "2y10tzvy8Qa/w7.nwKSzh4/6r.XtdArHBClAmDOAEEw7GXDZqVnpY4o4.";
         $user->clinic_id = 1;
         $user->save();
+
+        $user = new User();
+        $user->name = "Pedro Perez";
+        //$user->username = "adminusername";
+        $user->email = "pepe@mail.com";
+        $user->password = Hash::make("secret");
+        //$user->phone = "0000000000";
+        $user->role_id = UserType::Admin;
+        $user->token = "2y10tzvy8Qa/w7.nwKSzh4/6r.Xt854HBClAmDOAEEw7GXDZqVnpY4o4.";
+        $user->clinic_id = 2;
+        $user->save();
+
     }
 }

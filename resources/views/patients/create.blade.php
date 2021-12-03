@@ -60,9 +60,18 @@
                              @enderror
                         </div>
                     </div>
+                    <div class="mb-3 row">
+                        <label for="observations" class="col-sm-4 col-form-label text-right fw-bold">Observaciones (expediente)</label>
+                        <div class="col-sm-8">
+                            <textarea class="form-control @error('observations') is-invalid @enderror" name="observations">{{ old('observations') }}</textarea>
+                            @error('observations')
+                                <span class="invalid-feedback">{{$errors->first('observations')}}</span>
+                             @enderror
+                        </div>
+                    </div>
                     <div class="text-right">
-                        <button type="submit" class="btn bg-aquablue text-white fw-bold">Save</button>
-                        <button type="button" class="btn btn-warning text-white">Cancel</button>
+                        <button type="submit" class="btn bg-aquablue text-white fw-bold">Guardar</button>
+                        <a href="{{ URL::previous() }}" class="btn btn-warning text-white">Cancelar</a>
                     </div>
                 </form>
             </div>

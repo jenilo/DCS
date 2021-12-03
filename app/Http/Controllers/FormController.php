@@ -40,22 +40,18 @@ class FormController extends Controller
     public function destroy($form){
 
         if (Auth::user()->hasPermissionTo('delete form')) {
-            $form = Form::where('id','=',$form)->first();
-            /*if ($form->delete()) {
-                        return response()->json(['code'=> '200','message'=>'Eliminado exitoso']);
-                    }
-            return response()->json(['code'=> '400','message'=>'No se ha eliminado']);*/
+            $form = Form::find($form);
+            //return $form;
+
             if ($form != null) {
-                //$count = Form::selectRaw("count('patient_id') as count")->join('appointments','appointments.patient_id','=','patients.id')->where('patients.id','=',$form->id)->groupBy('patient_id')->first();
+                $count = Form::selectRaw("count('form_id') as count")->join('completed_forms','completed_forms.form_id','=','forms.id')->where('forms.id','=',$form->id)->groupBy('form_id')->first();
                 if ($count == null) {
-                    //return response()->json(['code' => '200', 'message' => 'Se elimino']);
-                    if ($form->delete()) {
+                    if ($form->delete())
                         return response()->json(['code'=> '200','message'=>'Eliminado exitoso']);
-                    }
-                    return response()->json(['code'=> '400','message'=>'No se elimino el tratamiento.']);
+                    return response()->json(['code'=> '400','message'=>'No se elimino el formulario.']);
                 }
                 else{
-                    return response()->json(['code'=> '400','message'=>'Este paciente tiene '.$count->count.' citas, no puede eliminarse.']);
+                    return response()->json(['code'=> '400','message'=>'Este cuestionario tiene '.$count->count.' resueltos, no puede eliminarse.']);
                 }
             }
             else{

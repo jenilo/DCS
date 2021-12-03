@@ -17,7 +17,7 @@ class CreateMedicalRecordsTable extends Migration
             $table->id();
             $table->date('dateAdmission');
             $table->text('observations');
-            $table->foreignId('patient_id')->constrained();
+            $table->foreignId('patient_id')->constrained()->onDelete('cascade');
         });
     }
 

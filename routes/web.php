@@ -61,7 +61,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     //Route::get('users', [UserController::class, 'index'])->name('users');
     Route::get('/clinic',[ClinicController::class,'show'])->name('clinic');
-    Route::get('/home',[ClinicController::class,'index'])->name('home');
+    Route::get('/dashboard',[ClinicController::class,'index'])->name('home');
 
 
     Route::get('patients', [PatientController::class, 'index'])->name('patients'); //probablemente ocupe middleware despues

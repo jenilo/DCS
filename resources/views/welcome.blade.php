@@ -24,6 +24,16 @@
             a:hover {
                 color: #4a5568
             }
+            .fondo{
+                background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("{{asset('images/dentist-office2.jpeg')}}");
+                background-position: center center;
+                background-size: 100% 100%;
+                background-repeat: no-repeat;
+                position: relative;
+                background-attachment: fixed;
+                /*background-color: rgba(0,0,0,0.6);*/
+
+            }
             /*.text-aquablue{
                 color: #1FBDBE !important;
             }
@@ -37,12 +47,13 @@
         </style>
     </head>
     <body class="antialiased" {{--style="background-image: url({{asset('images/dentist-office.jpg')}})"--}}>
-        <div class="relative flex items-top justify-center min-h-screen bg-gray-100 py-4">
+        <div class="relative flex items-top justify-center min-h-screen bg-gray-100 py-4 fondo">
+
             @if (Route::has('login'))
                 <div class="fixed top-0 right-0 px-6 py-4 sm:block">
                     <a href="{{ route('login') }}" class="btn bg-aquablue text-sm text-white rounded-pill">Iniciar sesión</a>
                     @if (Route::has('register'))
-                        <a href="{{ route('register') }}" class="text-decoration-none ml-4 text-sm fw-bold text-gray-700 hover:text-gray-900">Registrar</a>
+                        <a href="{{ route('register') }}" class="text-decoration-none ml-4 text-sm fw-bold text-white hover:text-gray-900">Registrar</a>
                     @endif
                 </div>
             @endif
@@ -88,7 +99,7 @@
 
                             <div class="ml-12">
                                 <div class="mt-2 text-gray-600 text-sm">
-                                    Laravel News is a community driven portal and newsletter aggregating all of the latest and most important news in the Laravel ecosystem, including new package releases and tutorials.
+                                    Lorem ipsum dolor sit amet consectetur adipisicing, elit. Dolor voluptatum possimus architecto beatae non dolorem velit, ipsum repudiandae, ullam at deserunt hic. Accusantium id quidem eaque accusamus atque, doloremque ducimus.
                                 </div>
                             </div>
                         </div>
@@ -105,11 +116,12 @@
                                 </div>
                             </div>
                         </div>
+                        {{--<img src="{{asset('images/dentist-office.jpg')}}" width="600" height="500">--}}
                     </div>
                 </div>
 
                 <div class="flex justify-center mt-4 sm:items-center sm:justify-between">
-                    <div class="text-center text-sm text-gray-500 sm:text-left">
+                    {{--<div class="text-center text-sm text-gray-500 sm:text-left">
                         <div class="flex items-center">
                             <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor" class="-mt-px w-5 h-5 text-gray-400">
                                 <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
@@ -131,7 +143,7 @@
 
                     <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
                         Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
-                    </div>
+                    </div>--}}
                 </div>
             </div>
         </div>
