@@ -19,8 +19,8 @@
                     </div>
                 </div>
                 <div class="modal-footer border-0">
-                    <button type="button" class="btn btn-warning text-white" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary bg-aquablue fw-bold">Save</button>
+                    <button type="button" class="btn btn-warning text-white" data-bs-dismiss="modal" >Cancelar</button>
+                    <button type="submit" class="btn btn-primary bg-aquablue fw-bold">Guardar</button>
                 </div>
             </form>
         </div>

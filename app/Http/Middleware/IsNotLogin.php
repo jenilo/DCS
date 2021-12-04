@@ -19,7 +19,7 @@ class IsNotLogin /*SuperAdminAuth*/
     {
         if ($this->checkIfUserIsLogin()) {//(backpack_user())) {
             //return $this->respondToUnauthorizedRequest($request);
-            return redirect()->route('home');
+            return redirect()->route('appointments');
         }
         return $next($request);
     }

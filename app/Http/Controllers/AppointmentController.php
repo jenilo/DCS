@@ -8,12 +8,14 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Http\Request;
 use App\Models\Appointment;
 use App\Models\Treatment;
+use App\Models\Clinic;
 use Auth;
 
 class AppointmentController extends Controller
 {
     public function index(){
-        return view('appointments.index');
+        $clinic = Clinic::find(Auth::user()->clinic_id)->first();
+        return view('appointments.index',compact('clinic'));
     }
 
     public function show($id){

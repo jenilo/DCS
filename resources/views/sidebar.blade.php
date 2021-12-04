@@ -1,6 +1,6 @@
 <div id="sidebar" class="p-2 sm-hidden bg-aquablue border-b border-gray-100" style="width: 220px; height: 90vh;">
     <ul class="m-0 p-0">
-        <li class="m-2 mb-3 border-bottom">
+        {{--<li class="m-2 mb-3 border-bottom">
             <a href="{{route('home')}}" class="d-block my-2 text-start fw-bold fs-5 text-white text-decoration-none">
                 <div class="row g-0">
                     <div class="col-2">
@@ -12,7 +12,7 @@
                 </div>
                  
             </a>
-        </li>
+        </li>--}}
         <li class="m-2 mb-3 border-bottom">
             <a class="d-block my-2 text-start fw-bold fs-5 text-white text-decoration-none" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                 <div class="row g-0">

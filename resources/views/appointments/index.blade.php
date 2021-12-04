@@ -6,6 +6,9 @@
 <div class="p-4">
     <div class="container bg-white p-4 rounded shadow">
         <div class="row g-0">
+            <h3>{{$clinic->name}}</h3>
+        </div>
+        <div class="row g-0">
             <div id="calendar">
       		</div>
         </div>

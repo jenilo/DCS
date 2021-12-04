@@ -9,6 +9,7 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
 use App\Enums\UserType;
 use App\Models\User;
+use App\Models\Clinic;
 
 use Auth;
 
@@ -17,7 +18,8 @@ class UserController extends Controller
     //
     public function index(){
         $users = User::where('clinic_id','=',Auth::user()->clinic_id)->with('role')->get();
-        return view('users.index',compact('users'));
+        $clinic = Clinic::find(Auth::user()->clinic_id)->first();
+        return view('users.index',compact('users','clinic'));
     }
 
     public function store(Request $request){

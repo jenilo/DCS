@@ -30,7 +30,7 @@
                     <input type="hidden" name="medical_record_id" value="{{$patient->medical_records->id}}">
                 </div>
                 <div class="modal-footer border-0">
-                    <button type="button" class="btn btn-warning text-white" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-warning text-white" data-bs-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-primary bg-aquablue fw-bold">Guardar</button>
                 </div>
             </form>
