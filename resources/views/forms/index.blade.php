@@ -6,6 +6,7 @@
 	<div class="container bg-white p-4 rounded shadow">
       	<div class="row g-0">
       		<div class="col-md-8 col-12 my-auto">
+      			<h2>{{$clinic->name}}</h2>
       			<h2 class="font-semibold text-xl text-gray-800 leading-tight mb-0">
                     Formularios
                 </h2>

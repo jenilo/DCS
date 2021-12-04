@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Http\Request;
 use App\Models\Treatment;
+use App\Models\Clinic;
 use Auth;
 
 class TreatmentController extends Controller
@@ -14,7 +15,8 @@ class TreatmentController extends Controller
     //
     public function index(){
         $treatments = Treatment::where('clinic_id','=',Auth::user()->clinic_id)->paginate(20);
-        return view('treatments.index',compact('treatments'));
+        $clinic = Clinic::find(Auth::user()->clinic_id)->first();
+        return view('treatments.index',compact('treatments','clinic'));
     }
 
     public function store(Request $request){

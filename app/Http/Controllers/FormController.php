@@ -8,13 +8,15 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Http\Request;
 use App\Models\Question;
 use App\Models\Form;
+use App\Models\Clinic;
 use Auth;
 
 class FormController extends Controller
 {
     public function index(){
         $forms = Form::where('clinic_id','=',Auth::user()->clinic_id)->paginate(20);
-        return view('forms.index',compact('forms'));
+        $clinic = Clinic::find(Auth::user()->clinic_id)->first();
+        return view('forms.index',compact('forms','clinic'));
     }
 
     public function store(Request $request){

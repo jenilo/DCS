@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\Patient;
 use App\Models\Form;
 use Carbon\Carbon;
+use App\Models\Clinic;
 use Auth;
 
 class PatientController extends Controller
@@ -18,7 +19,8 @@ class PatientController extends Controller
         //$patients = Patient::where('clinic_id','=',Auth::user()->clinic_id)->paginate(5);
         $patients = Patient::where('clinic_id','=',Auth::user()->clinic_id)->get();
         $count = Patient::selectRaw('count(patients.id) as count')->where('clinic_id','=',Auth::user()->clinic_id)->get()[0]->count;
-        return view('patients.index',compact('patients','count'));
+        $clinic = Clinic::find(Auth::user()->clinic_id)->first();
+        return view('patients.index',compact('patients','count','clinic'));
     }
 
     public function store(Request $request){
