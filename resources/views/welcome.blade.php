@@ -60,7 +60,7 @@
 
             <div class="max-w-6xl mx-auto my-auto sm:px-6 lg:px-8">
                 <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
-                    <span class="ml-4 mt-4 my-auto text-title"><a class="text-aquablue text-decoration-none fw-bold" href="{{route('home')}}"><i class="fas fa-tooth"></i> DCS</a></span>
+                    <span class="ml-4 mt-4 my-auto text-title"><a class="text-aquablue text-decoration-none fw-bold" href="{{route('appointments')}}"><i class="fas fa-tooth"></i> DCS</a></span>
                 </div>
 
                 <div class="mt-8 bg-white overflow-hidden shadow sm:rounded-lg">

@@ -1,7 +1,7 @@
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
-            <span class="ml-4 mt-4 my-auto text-title"><a class="text-aquablue text-decoration-none fw-bold" href="{{route('home')}}"><i class="fas fa-tooth"></i> DCS</a></span>
+            <span class="ml-4 mt-4 my-auto text-title"><a class="text-aquablue text-decoration-none fw-bold" href="{{route('appointments')}}"><i class="fas fa-tooth"></i> DCS</a></span>
         </x-slot>
 
         <x-jet-validation-errors class="mb-4" />
