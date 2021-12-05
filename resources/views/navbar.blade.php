@@ -19,17 +19,15 @@
                             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                         </svg>
                     </button>
-                    <ul class="dropdown-menu shadow border" aria-labelledby="dropdownMenu2">
-                        <li class="dropdown-item">
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <a class="text-decoration-none fw-bold fs-6 text-dark" href="{{ route('logout') }}"
-                                         onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-                                    Cerrar sesión
-                                </a>
-                            </form>
-                        </li>
+                    <ul class="dropdown-menu shadow border text-decoration-none" aria-labelledby="dropdownMenu2">
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <x-jet-responsive-nav-link class="text-decoration-none fs-6 text-dark" href="{{ route('logout') }}"
+                                     onclick="event.preventDefault();
+                                            this.closest('form').submit();">
+                                Cerrar sesión
+                            </x-jet-responsive-nav-link>
+                        </form>
                     </ul>
                 </div>
                 
