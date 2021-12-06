@@ -97,12 +97,6 @@ class PermissionSeeder extends Seeder
         foreach ($users as $u) {
             if($u->role_id != null)
                 $u->assignRole($u->role_id);
-            /*if($u->role_id == UserType::SuperAdmin)
-                $u->assignRole($superadmin);  
-            elseif($u->role_id == UserType::Admin)
-                $u->assignRole($admin);
-            elseif($u->role_id == UserType::User)
-                $u->assignRole($user);*/
         }
     }
 }

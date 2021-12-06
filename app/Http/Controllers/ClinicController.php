@@ -49,6 +49,7 @@ class ClinicController extends Controller
                 $user->clinic_id = $clinic->id;
                 $user->token = $clinic->token;
                 if ($user->save()) {
+                    $this->givePermissionsToAdmin($user);
                     return  redirect('login')->with('success', 'Clinica creada satisfactoriamente.');
                 }
                 $clinic->delete();
@@ -58,6 +59,35 @@ class ClinicController extends Controller
 
         /*}
         return redirect()->back->with('error','No tienes permiso.');*/
+    }
+
+    public function givePermissionsToAdmin($user){
+        $user->givePermissionTo([
+            'crud users for clinic',
+            'read clinic',
+            'update clinic',
+            'delete clinic',
+            'create appointment',
+            'read appointment',
+            'update appointment',
+            'delete appointment',
+            'create patient',
+            'read patient',
+            'update patient',
+            'delete patient',
+            'create treatment',
+            'read treatment',
+            'update treatment',
+            'delete treatment',
+            'create form',
+            'read form',
+            'update form',
+            'delete form',
+            'create user',
+            'read user',
+            'update user',
+            'delete user',
+        ]);
     }
 
     public function show(){
