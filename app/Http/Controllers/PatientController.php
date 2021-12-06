@@ -19,7 +19,7 @@ class PatientController extends Controller
         //$patients = Patient::where('clinic_id','=',Auth::user()->clinic_id)->paginate(5);
         $patients = Patient::where('clinic_id','=',Auth::user()->clinic_id)->get();
         $count = Patient::selectRaw('count(patients.id) as count')->where('clinic_id','=',Auth::user()->clinic_id)->get()[0]->count;
-        $clinic = Clinic::find(Auth::user()->clinic_id)->first();
+        $clinic = Clinic::find(Auth::user()->clinic_id);
         return view('patients.index',compact('patients','count','clinic'));
     }
 

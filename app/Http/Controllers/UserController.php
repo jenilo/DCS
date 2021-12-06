@@ -18,7 +18,7 @@ class UserController extends Controller
     //
     public function index(){
         $users = User::where('clinic_id','=',Auth::user()->clinic_id)->with('role')->get();
-        $clinic = Clinic::find(Auth::user()->clinic_id)->first();
+        $clinic = Clinic::find(Auth::user()->clinic_id);
         return view('users.index',compact('users','clinic'));
     }
 

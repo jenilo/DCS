@@ -15,7 +15,7 @@ class FormController extends Controller
 {
     public function index(){
         $forms = Form::where('clinic_id','=',Auth::user()->clinic_id)->paginate(20);
-        $clinic = Clinic::find(Auth::user()->clinic_id)->first();
+        $clinic = Clinic::find(Auth::user()->clinic_id);
         return view('forms.index',compact('forms','clinic'));
     }
 

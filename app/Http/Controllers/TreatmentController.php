@@ -15,7 +15,7 @@ class TreatmentController extends Controller
     //
     public function index(){
         $treatments = Treatment::where('clinic_id','=',Auth::user()->clinic_id)->paginate(20);
-        $clinic = Clinic::find(Auth::user()->clinic_id)->first();
+        $clinic = Clinic::find(Auth::user()->clinic_id);
         return view('treatments.index',compact('treatments','clinic'));
     }
 

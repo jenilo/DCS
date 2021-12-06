@@ -9,12 +9,13 @@ use Illuminate\Http\Request;
 use App\Models\Appointment;
 use App\Models\Treatment;
 use App\Models\Clinic;
+use App\Models\User;
 use Auth;
 
 class AppointmentController extends Controller
 {
     public function index(){
-        $clinic = Clinic::find(Auth::user()->clinic_id)->first();
+        $clinic = Clinic::find(Auth::user()->clinic_id);
         return view('appointments.index',compact('clinic'));
     }
 
